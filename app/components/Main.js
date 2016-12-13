@@ -16,7 +16,6 @@ export default class Main extends Component {
   }
 
   toggleEdit = () => {
-
     this.setState({ edit: !this.state.edit });
   }
 
