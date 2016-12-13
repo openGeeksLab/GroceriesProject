@@ -13,7 +13,7 @@ export default class Footer extends Component {
     return (
           <View style={styles.footer}>
             <TouchableOpacity style={{width: 35, height: 35}}>
-              <Image style={{width: 25, height: 25}} source={{uri: 'list_icon_active.png'}}/>
+              <Image style={{width: 30, height: 25}} source={{uri: 'list_icon_inactive.png'}}/>
             </TouchableOpacity>
             <TouchableOpacity style={{width: 25, height: 25, marginBottom: 10}}>
               <Image style={{width: 35, height: 25}} source={{uri: 'cart_icon_inactive.png'}}/>

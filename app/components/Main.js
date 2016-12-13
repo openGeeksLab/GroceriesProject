@@ -11,10 +11,24 @@ import Header from './Header';
 import Footer from './Footer';
 
 export default class Main extends Component {
+  state = {
+    edit: false,
+  }
+
+  toggleEdit = () => {
+
+    this.setState({ edit: !this.state.edit });
+  }
+
   render() {
     return (
           <View style={styles.container}>
-            <Header />
+            <Header
+              rightTitle={this.state.edit}
+              centerText={this.state.edit ? 'Edit list' : 'Lists'}
+              leftIcon={this.state.edit ? 'add.png' : 'settings.png'}
+              onRightPress={this.toggleEdit}
+            />
             <ScrollView style={{flex:1,}}>
             </ScrollView>
             <Footer />
