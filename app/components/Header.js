@@ -6,25 +6,42 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  TextInput,
 } from 'react-native';
 
 export default class Header extends Component {
   render() {
     return (
             <View style={styles.header}>
-              <TouchableOpacity style={{flex: 1,paddingLeft:30  ,width: 35,height: 35}} >
-                <Image style={{width: 25, height: 25}} source={{uri: this.props.leftIcon}}/>
+              <TouchableOpacity style={{flex: 1,paddingLeft:20 ,width: 40, height: 35}} onPress={this.props.onLeftPress}>
+
+                { this.props.leftTitleAdd
+                  ?
+                    this.props.leftTitle
+                    ?
+                    <Text style={{fontSize:20}}> Cansel </Text>
+                    :
+                    <Image style={{width: 25, height: 25}} source={{uri: 'settings.png'}}/>
+                  :
+
+                      this.props.leftTitle
+                      ?
+                        <Image  style={{width: 25, height: 25}} source={{uri: 'add.png'}}/>
+                      :
+                        <Image  style={{width: 25, height: 25}} source={{uri: 'settings.png'}}/>
+
+                }
               </TouchableOpacity>
-              <Text style={{flex:5,textAlign:'center',fontSize:20}}>
+              <Text style={{flex:3,textAlign:'center',fontSize:20}}>
                 {this.props.centerText}
               </Text>
-              <TouchableOpacity style={{flex:1,width: 35,height: 35}} onPress={this.props.onRightPress}>
+              <TouchableOpacity style={{flex:0.7,width: 35,height: 35}} onPress={this.props.onRightPress}>
                 {
                   this.props.rightTitle
                   ?
                     <Text style={{fontSize:20,}}>Done</Text>
                   :
-                    <Image  style={{width: 25, height: 25}} source={{uri: 'edit.png'}}/>
+                    <Image  style={{width: 25, height: 25, marginLeft: 15,}} source={{uri: 'edit.png'}}/>
                 }
               </TouchableOpacity>
             </View>
