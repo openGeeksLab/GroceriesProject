@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import {Provider} from 'react-redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -13,11 +14,15 @@ import {
 } from 'react-native';
 
 import Main from './app/components/Main';
+import {configureStore} from './app/store';
 
 export default class GroceriesProject extends Component {
   render() {
     return (
-      <Main />
+      <Provider>
+        <Main />
+      </Provider>
+
     );
   }
 }
