@@ -13,7 +13,9 @@ export default class Header extends Component {
   render() {
     return (
             <View style={styles.header}>
-              <TouchableOpacity style={{flex: 1,paddingLeft:20 ,width: 40, height: 35}} onPress={this.props.onLeftPress}>
+              <TouchableOpacity
+                style={{flex: 1,paddingLeft:20 ,width: 40, height: 35}}
+                onPress={this.props.onLeftPress}>
 
                 { this.props.leftTitleAdd
                   ?
@@ -33,7 +35,22 @@ export default class Header extends Component {
                 }
               </TouchableOpacity>
               <Text style={{flex:3,textAlign:'center',fontSize:20}}>
-                {this.props.centerText}
+                { this.props.leftTitleAdd
+                  ?
+                    this.props.leftTitle
+                    ?
+                    <Text style={{fontSize:20}}> Add new list </Text>
+                    :
+                    <Text>Lists </Text>
+                  :
+
+                    this.props.rightTitle
+                    ?
+                      <Text style={{fontSize:20,}}>Edit lists</Text>
+                    :
+                      <Text style={{fontSize:20,}}>Lists</Text>
+
+                }
               </Text>
               <TouchableOpacity style={{flex:0.7,width: 35,height: 35}} onPress={this.props.onRightPress}>
                 {
