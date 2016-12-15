@@ -19,7 +19,7 @@ import {configureStore} from './app/store';
 export default class GroceriesProject extends Component {
   render() {
     return (
-      <Provider>
+      <Provider store={configureStore()}>
         <Main />
       </Provider>
 

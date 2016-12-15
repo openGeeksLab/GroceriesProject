@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
   View,
   Text,
@@ -12,15 +13,18 @@ import {
 
 import Header from './Header';
 import Footer from './Footer';
+import {addList} from '../actions';
 
 export class NewListItem extends Component {
     render() {
       return (
+        <TouchableOpacity>
         <View style={styles.newlistcontainer}>
           <Text style={styles.newlisttext}>
             {this.props.text}
           </Text>
         </View>
+        </TouchableOpacity>
       )
     }
 }
@@ -30,6 +34,17 @@ export default class Main extends Component {
     edit: false,
     add: false,
     modalVisible: false,
+    newListText: "",
+  }
+
+  addNewList = () => {
+    var {newListText} = this.state;
+    if (newListText && newListText !== "") {
+      this.setState({
+        newListText: ""
+      });
+      this.props.dispatch(addList(newListText));
+    }
   }
 
   toggleAdd = () => {
@@ -54,18 +69,8 @@ export default class Main extends Component {
   }
 
   render() {
-    var temporaryNewLists = [
-      {
-        id: '234234',
-        text: 'Hello!'
-      },
-      {
-        id: '234234asd',
-        text: 'Hello again!'
-      },
-    ]
     var renderNewLists = () => {
-      return temporaryNewLists.map((newlist)=> {
+      return this.props.newlists.map((newlist)=> {
         return(
           <NewListItem text={newlist.text} key={newlist.id} id={newlist.id}/>
         )
@@ -103,8 +108,11 @@ export default class Main extends Component {
                               borderBottomWidth:2, borderColor: 'gray',}}>
                   <TextInput
                     style={{height: 40, }}
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(text) => {this.setState({newListText: text});  }}
+                    value={this.state.newListText}
+                    returnKeyType="done"
+                    placeholder="Input new list"
+                    onSubmitEditing={this.addNewList}
                   />
 
                </View>
@@ -124,8 +132,7 @@ const styles = StyleSheet.create({
   },
   newlistcontainer:{
     padding: 16,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderWidth: 1,
     marginBottom: -1,
     borderColor: '#ccc',
     flexDirection: 'row',
@@ -137,4 +144,10 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Main;
+var mapStatetoProps = (state) => {
+  return{
+    newlists: state.newlists
+  }
+}
+
+module.exports = connect(mapStatetoProps)(Main);
