@@ -28,7 +28,7 @@ export default class Header extends Component {
     if (leftIcon) {
       return (<Image style={{ width: 25, height: 25 }} source={leftIcon}/>);
     }
-    return(<Text style={{ fontFamily: Cochin, color: 'blue', fontSize: 22 }}>{leftText}</Text>);
+    return(<Text style={{ fontFamily: HelveticaNeue, color: 'blue', fontSize: 22 }}>{leftText}</Text>);
   }
 
   renderRightView = () => {
@@ -36,7 +36,7 @@ export default class Header extends Component {
     if (rightIcon) {
       return(<Image style={{ width: 25, height: 25 }} source={rightIcon}/>);
     }
-    return (<Text style={{ fontFamily: Cochin, color: 'blue', fontSize: 22 }}>{rightText}</Text>);
+    return (<Text style={{ fontFamily: HelveticaNeue, color: 'blue', fontSize: 22 }}>{rightText}</Text>);
   }
 
   render() {
