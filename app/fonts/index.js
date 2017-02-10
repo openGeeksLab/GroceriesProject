@@ -7,8 +7,8 @@
    Ionicons,
    AmericanTypewriter,
    Cochin,
-  //  times_0,
+   times,
    DIN_Alternate,
-  //  ufonts_com_gillsans,
+   gillsans,
    AvenirNext_Regular,
  } from './fonts';

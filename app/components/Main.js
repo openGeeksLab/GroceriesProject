@@ -10,6 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -21,9 +22,9 @@ import {
   Ionicons,
   AmericanTypewriter,
   Cochin,
-  // times_0,
+  times,
   DIN_Alternate,
-  ufonts_com_gillsans,
+  gillsans,
   AvenirNext_Regular,
 } from 'AppFonts';
 
@@ -98,7 +99,7 @@ export default class Main extends Component {
     }
     return (
           <View style={styles.container}>
-            <Header />
+            <Header leftIcon={SETTINGS_ICON} leftAction={() => { console.warn('Settings Press') }} rightAction={() => { console.warn('Edit press') }} rightIcon={EDIT_ICON} title={'Lists'} />
             <View style={{ flex: 1 }}>
               <Text style={{ fontFamily: HelveticaNeue, fontSize: 20, }}>
                 HelveticaNeue
@@ -115,15 +116,15 @@ export default class Main extends Component {
               <Text style={{ fontFamily: Cochin, fontSize: 20, }}>
                 Cochin
               </Text>
-              {/* <Text style={{ fontFamily: 'times_0' }}>
-                times_0
-              </Text> */}
+              <Text style={{ fontFamily: times, fontSize: 20, }}>
+                Times New Roman
+              </Text>
               <Text style={{ fontFamily: DIN_Alternate, fontSize: 20, }}>
                 DIN_Alternate
               </Text>
-              {/* <Text style={{ fontFamily: ufonts_com_gillsans }}>
-                ufonts_com_gillsans
-              </Text> */}
+              <Text style={{ fontFamily: gillsans, fontSize: 20, }}>
+                Gill Sans
+              </Text>
               <Text style={{ fontFamily: AvenirNext_Regular, fontSize: 20, }}>
                 AvenirNext_Regular
               </Text>
