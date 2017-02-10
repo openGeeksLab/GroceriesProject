@@ -3,14 +3,16 @@ import {
   View,
   Text,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import Header from './Header';
+
+const { width } = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width,
   },
 });
 
@@ -18,7 +20,7 @@ class Settings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header leftText={SETTINGS_ICON} rightIcon={EDIT_ICON} title={'Lists'} />
+        <Header leftText={'Cancel'} leftAction={this.props.navigator.pop()} rightAction={this.props.navigator.pop()} rightText={'Done'} title={'Settings'} />
       </View>
     );
   }

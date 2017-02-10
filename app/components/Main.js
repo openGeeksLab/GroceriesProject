@@ -99,7 +99,7 @@ export default class Main extends Component {
     }
     return (
           <View style={styles.container}>
-            <Header leftIcon={SETTINGS_ICON} leftAction={() => { console.warn('Settings Press') }} rightAction={() => { console.warn('Edit press') }} rightIcon={EDIT_ICON} title={'Lists'} />
+            <Header leftIcon={SETTINGS_ICON} leftAction={() => { this.props.navigator.push({ title: 'Settings' }) }} rightAction={() => { this.props.onBack() }} rightIcon={EDIT_ICON} title={'Lists'} />
             <View style={{ flex: 1 }}>
               <Text style={{ fontFamily: HelveticaNeue, fontSize: 20, }}>
                 HelveticaNeue

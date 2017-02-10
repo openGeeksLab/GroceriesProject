@@ -13,14 +13,14 @@ import {
   View
 } from 'react-native';
 
-import Main from './app/components/Main';
+import Navigator from './app/components/Navigator';
 import {configureStore} from './app/store';
 
 export default class GroceriesProject extends Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Main />
+        <Navigator />
       </Provider>
 
     );
