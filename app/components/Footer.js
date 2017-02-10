@@ -29,40 +29,41 @@ const styles = StyleSheet.create({
   },
 });
 
-renderLeftView = () => {
-  if (this.props.leftIcon) {
-    return (
-      <TouchableOpacity style={styles.touchOpacityFooter}>
-        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.leftIcon}/>
-      </TouchableOpacity>
-    );
-  }
-  return null;
-}
-
-renderCenterView = () => {
-  if (this.props.centerIcon) {
-    return (
-      <TouchableOpacity style={styles.touchOpacityFooter}>
-        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.centerIcon}/>
-      </TouchableOpacity>
-    );
-  }
-  return null;
-}
-
-renderRightView = () => {
-  if (this.props.rightIcon) {
-    return (
-      <TouchableOpacity style={styles.touchOpacityFooter}>
-        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.rightIcon}/>
-      </TouchableOpacity>
-    );
-  }
-  return null;
-}
-
 export default class Footer extends Component {
+
+  renderLeftView = () => {
+    if (this.props.leftIcon) {
+      return (
+        <TouchableOpacity style={styles.touchOpacityFooter}>
+          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.leftIcon}/>
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
+  renderCenterView = () => {
+    if (this.props.centerIcon) {
+      return (
+        <TouchableOpacity style={styles.touchOpacityFooter}>
+          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.centerIcon}/>
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
+  renderRightView = () => {
+    if (this.props.rightIcon) {
+      return (
+        <TouchableOpacity style={styles.touchOpacityFooter}>
+          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.rightIcon}/>
+        </TouchableOpacity>
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
       <View style={styles.footer}>
