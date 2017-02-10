@@ -60,13 +60,21 @@ export default class Main extends Component {
       this.setState({modalVisible: visible});
     }
   onLeftonPress = () => {
-    this.toggleAdd;
+    this.toggleAdd();
     this.setModalVisible(true);
   }
   onLeftonPressoff = () => {
-    this.toggleAdd;
+    this.toggleAdd();
     this.setModalVisible(false);
   }
+
+  changeText = (text) => {
+    var newText = text;
+    this.setState({
+      newListText: text,
+    });
+  }
+
 
   render() {
     var renderNewLists = () => {
@@ -78,13 +86,17 @@ export default class Main extends Component {
     }
     return (
           <View style={styles.container}>
-            <Header
+            <Header />
+            <View style={{ flex: 1 }}>
+            </View>
+            <Footer />
+            {/* <Header
               rightTitle={this.state.edit}
               centerText={this.state.edit}
-              onRightPress={this.toggleEdit}
+              onRightPress={() => {this.toggleEdit()}}
               leftTitle={this.state.edit}
               leftTitleAdd={this.state.add}
-              onLeftPress={this.onLeftonPress}
+              onLeftPress={() => {this.onLeftonPress()}}
             />
             <ScrollView style={{flex:1,}}
               automaticallyAdjustContentInsets={false}>
@@ -108,7 +120,7 @@ export default class Main extends Component {
                               borderBottomWidth:2, borderColor: 'gray',}}>
                   <TextInput
                     style={{height: 40, }}
-                    onChangeText={(text) => {this.setState({newListText: text});  }}
+                    onChangeText={(text) => {this.changeText(text)}}
                     value={this.state.newListText}
                     returnKeyType="done"
                     placeholder="Input new list"
@@ -120,7 +132,7 @@ export default class Main extends Component {
                 <Text> Characters left: 28
                 </Text>
                </View>
-             </Modal>
+             </Modal> */}
           </View>
     );
   }
