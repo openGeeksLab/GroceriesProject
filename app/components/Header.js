@@ -9,33 +9,43 @@ import {
   TextInput,
   Platform,
 } from 'react-native';
+import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
+
+const styles = StyleSheet.create({
+  header:{
+    marginTop: 26,
+    borderWidth: 1,
+    borderColor: 'lightgrey',
+    backgroundColor: '#f5f5f5',
+  },
+});
 
 export default class Header extends Component {
-  state = {
-    scrollChange: false,
-  }
-
-  pressHeaderRight = () => {
-    this.props.onRightPress();
-    this.setState({scrollChange: !this.state.scrollChange});
-  }
+  // state = {
+  //   scrollChange: false,
+  // }
+  //
+  // pressHeaderRight = () => {
+  //   this.props.onRightPress();
+  //   this.setState({scrollChange: !this.state.scrollChange});
+  // }
   render() {
     return (
       <View style={styles.header}>
         <View style={{ marginHorizontal: 15, flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingBottom: 15 }}>
           <View>
             <TouchableOpacity style={{ width: 70 }}>
-              <Image style={{width: 25, height: 25}} source={{uri: 'settings.png'}}/>
+              <Image style={{width: 25, height: 25}} source={SETTINGS_ICON}/>
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={{ fontSize:22, fontWeight: 'bold' }}>
+            <Text style={{ fontSize:22, fontFamily: 'DIN BoldAlternate'}}>
               Lists
             </Text>
           </View>
           <View>
             <TouchableOpacity style={{ width: 70, alignItems: 'flex-end' }}>
-              <Image  style={{width: 25, height: 25, marginLeft: 15,}} source={{uri: 'edit.png'}}/>
+              <Image  style={{width: 25, height: 25, marginLeft: 15,}} source={EDIT_ICON}/>
             </TouchableOpacity>
           </View>
         </View>
@@ -94,12 +104,3 @@ export default class Header extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  header:{
-    marginTop: 26,
-    borderBottomWidth: 1,
-    borderColor: 'lightgrey',
-    backgroundColor: '#f5f5f5',
-  },
-});

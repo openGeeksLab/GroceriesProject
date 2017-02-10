@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-// import { LIST_ICON, CART_ICON, } from 'AppIcons';
+import { LIST_INACTIVE_ICON, CART_INACTIVE_ICON, } from 'AppIcons';
 
 const styles = StyleSheet.create({
   footer: {
@@ -35,10 +35,10 @@ export default class Footer extends Component {
     return (
           <View style={styles.footer}>
             <TouchableOpacity style={styles.touchOpacityFooter}>
-              <Image style={styles.imageFooter} resizeMode={'contain'} source={require('img/list_icon_inactive.png')}/>
+              <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.touchOpacityFooter}>
-              <Image style={styles.imageFooter} source={require('img/cart_icon_inactive.png')}/>
+              <Image style={styles.imageFooter} source={CART_INACTIVE_ICON}/>
             </TouchableOpacity>
           </View>
     );

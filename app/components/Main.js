@@ -31,49 +31,49 @@ export class NewListItem extends Component {
 
 export default class Main extends Component {
   state = {
-    edit: false,
-    add: false,
-    modalVisible: false,
-    newListText: "",
+    // edit: false,
+    // add: false,
+    // modalVisible: false,
+    // newListText: "",
   }
 
-  addNewList = () => {
-    var {newListText} = this.state;
-    if (newListText && newListText !== "") {
-      this.setState({
-        newListText: ""
-      });
-      this.props.dispatch(addList(newListText));
-    }
-  }
-
-  toggleAdd = () => {
-
-    this.setState({ add: !this.state.add });
-  }
-
-  toggleEdit = () => {
-    this.setState({ edit: !this.state.edit });
-  }
-
-  setModalVisible(visible) {
-      this.setState({modalVisible: visible});
-    }
-  onLeftonPress = () => {
-    this.toggleAdd();
-    this.setModalVisible(true);
-  }
-  onLeftonPressoff = () => {
-    this.toggleAdd();
-    this.setModalVisible(false);
-  }
-
-  changeText = (text) => {
-    var newText = text;
-    this.setState({
-      newListText: text,
-    });
-  }
+  // addNewList = () => {
+  //   var {newListText} = this.state;
+  //   if (newListText && newListText !== "") {
+  //     this.setState({
+  //       newListText: ""
+  //     });
+  //     this.props.dispatch(addList(newListText));
+  //   }
+  // }
+  //
+  // toggleAdd = () => {
+  //
+  //   this.setState({ add: !this.state.add });
+  // }
+  //
+  // toggleEdit = () => {
+  //   this.setState({ edit: !this.state.edit });
+  // }
+  //
+  // setModalVisible(visible) {
+  //     this.setState({modalVisible: visible});
+  //   }
+  // onLeftonPress = () => {
+  //   this.toggleAdd();
+  //   this.setModalVisible(true);
+  // }
+  // onLeftonPressoff = () => {
+  //   this.toggleAdd();
+  //   this.setModalVisible(false);
+  // }
+  //
+  // changeText = (text) => {
+  //   var newText = text;
+  //   this.setState({
+  //     newListText: text,
+  //   });
+  // }
 
 
   render() {
@@ -87,7 +87,7 @@ export default class Main extends Component {
     return (
           <View style={styles.container}>
             <Header />
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: 'black' }}>
             </View>
             <Footer />
             {/* <Header
