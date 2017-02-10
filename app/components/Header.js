@@ -40,13 +40,13 @@ export default class Header extends Component {
   }
 
   render() {
-    const { leftIcon, leftText, rightIcon, rightText, title, leftAction, rightAction } = this.props;
+    const { leftIcon, leftText, rightIcon, rightText, title, } = this.props;
 
     return (
       <View style={styles.header}>
         <View style={{ marginHorizontal: 15, flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingBottom: 15 }}>
           <View>
-            <TouchableOpacity style={{ width: 70 }} onPress={leftAction}>
+            <TouchableOpacity style={{ width: 70 }} onPress={() => {this.props.leftAction()}}>
               {this.renderLeftView()}
             </TouchableOpacity>
           </View>
@@ -56,7 +56,7 @@ export default class Header extends Component {
             </Text>
           </View>
           <View>
-            <TouchableOpacity style={{ width: 70, alignItems: 'flex-end' }} onPress={rightAction}>
+            <TouchableOpacity style={{ width: 70, alignItems: 'flex-end' }} onPress={() => {this.props.rightAction()}}>
               {this.renderRightView()}
             </TouchableOpacity>
           </View>

@@ -20,8 +20,11 @@ class Settings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header leftText={'Cancel'} leftAction={this.props.navigator.pop()} rightAction={this.props.navigator.pop()} rightText={'Done'} title={'Settings'} />
-      </View>
+        <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />
+        <View style={{ flex: 1 }}>
+
+        </View>
+    </View>
     );
   }
 }

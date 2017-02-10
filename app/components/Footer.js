@@ -29,6 +29,23 @@ const styles = StyleSheet.create({
   },
 });
 
+renderLeftView = () => {
+  <TouchableOpacity style={styles.touchOpacityFooter}>
+    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
+  </TouchableOpacity>
+}
+
+renderCenterView = () => {
+  <TouchableOpacity style={styles.touchOpacityFooter}>
+    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
+  </TouchableOpacity>
+}
+
+renderRightView = () => {
+  <TouchableOpacity style={styles.touchOpacityFooter}>
+    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
+  </TouchableOpacity>
+}
 
 export default class Footer extends Component {
   render() {

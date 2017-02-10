@@ -16,33 +16,17 @@ export default class NavigatorClass extends Component {
         renderScene={(route, navigator) => {
           switch (route.title) {
             case 'Main': return (<Main route={route} navigator={navigator} />);
-                // title={route.title}
-            //     onSettings={() => {
-            //       // const nextIndex = route.index + 1;
-            //       navigator.push({
-            //         title: 'Main',
-            //       });
-            //     }}
-            //     // onBack={() => {
-            //     //   if (route.index > 0) {
-            //     //     navigator.pop();
-            //     //   }
-            //     // }}
-            //   />);
-            // }
-            case 'Settings': return(<Settings route={route} navigator={navigator} />);
-              // <Settings
-              //   onBack={() => {
-              //     navigator.push({
-              //       title: 'Settings',
-              //     });
-              //   }}
-              // />);
+            case 'Settings': return (<Settings route={route} navigator={navigator} />);
             default: null;
 
           }
-        }
-      }
+        }}
+        configureScene={(route, routeStack) =>{
+          switch (route.title) {
+            case 'Settings': return Navigator.SceneConfigs.FloatFromLeft;
+            default: return Navigator.SceneConfigs.FloatFromRight;
+          }
+        }}
       />
     );
   }
