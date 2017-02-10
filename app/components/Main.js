@@ -10,7 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
+import { SETTINGS_ICON, EDIT_ICON, CART_INACTIVE_ICON, LIST_INACTIVE_ICON  } from 'AppIcons';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -129,7 +129,7 @@ export default class Main extends Component {
                 AvenirNext_Regular
               </Text>
             </View>
-            <Footer />
+            <Footer rightIcon={CART_INACTIVE_ICON} leftIcon={LIST_INACTIVE_ICON}/>
             {/* <Header
               rightTitle={this.state.edit}
               centerText={this.state.edit}

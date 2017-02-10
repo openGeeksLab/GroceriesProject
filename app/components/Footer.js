@@ -30,34 +30,46 @@ const styles = StyleSheet.create({
 });
 
 renderLeftView = () => {
-  <TouchableOpacity style={styles.touchOpacityFooter}>
-    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
-  </TouchableOpacity>
+  if (this.props.leftIcon) {
+    return (
+      <TouchableOpacity style={styles.touchOpacityFooter}>
+        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.leftIcon}/>
+      </TouchableOpacity>
+    );
+  }
+  return null;
 }
 
 renderCenterView = () => {
-  <TouchableOpacity style={styles.touchOpacityFooter}>
-    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
-  </TouchableOpacity>
+  if (this.props.centerIcon) {
+    return (
+      <TouchableOpacity style={styles.touchOpacityFooter}>
+        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.centerIcon}/>
+      </TouchableOpacity>
+    );
+  }
+  return null;
 }
 
 renderRightView = () => {
-  <TouchableOpacity style={styles.touchOpacityFooter}>
-    <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
-  </TouchableOpacity>
+  if (this.props.rightIcon) {
+    return (
+      <TouchableOpacity style={styles.touchOpacityFooter}>
+        <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.rightIcon}/>
+      </TouchableOpacity>
+    );
+  }
+  return null;
 }
 
 export default class Footer extends Component {
   render() {
     return (
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.touchOpacityFooter}>
-              <Image style={styles.imageFooter} resizeMode={'contain'} source={LIST_INACTIVE_ICON}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.touchOpacityFooter}>
-              <Image style={styles.imageFooter} source={CART_INACTIVE_ICON}/>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.footer}>
+        {this.renderLeftView()}
+        {this.renderCenterView()}
+        {this.renderRightView()}
+      </View>
     );
   }
 }

@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+import { TUTORIAL_ICON, LIFEBUOY_ICON, STAR_ICON } from 'AppIcons';
 import Header from './Header';
+import Footer from './Footer';
 
 const { width } = Dimensions.get('window').width;
 
@@ -24,6 +26,7 @@ class Settings extends Component {
         <View style={{ flex: 1 }}>
 
         </View>
+        <Footer leftIcon={TUTORIAL_ICON} centerIcon={LIFEBUOY_ICON} rightIcon={STAR_ICON} />
     </View>
     );
   }

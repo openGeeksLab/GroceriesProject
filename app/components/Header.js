@@ -71,8 +71,6 @@ Header.propTypes = {
   leftText: PropTypes.string,
   rightText: PropTypes.string,
   title: PropTypes.string,
-  leftIcon: PropTypes.number,
-  rightIcon: PropTypes.number,
   leftAction: PropTypes.func,
   rightAction: PropTypes.func,
 };
