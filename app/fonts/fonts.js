@@ -1,0 +1,9 @@
+export const HelveticaNeue = 'HelveticaNeue';
+export const Georgia = 'Georgia';
+export const Ionicons = 'Ionicons';
+export const AmericanTypewriter = 'AmericanTypewriter';
+export const Cochin = 'Cochin';
+// export const times_0 = 'times_0';
+export const DIN_Alternate = 'DIN Alternate';
+// export const ufonts_com_gillsans = 'ufonts.com_gillsans';
+export const AvenirNext_Regular = 'AvenirNext-Regular';

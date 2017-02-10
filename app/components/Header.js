@@ -10,6 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
+import { HelveticaNeue } from 'AppFonts';
 
 const styles = StyleSheet.create({
   header:{
@@ -39,7 +40,7 @@ export default class Header extends Component {
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={{ fontSize:22, fontFamily: 'DIN BoldAlternate'}}>
+            <Text style={{ fontSize:22, fontFamily: HelveticaNeue}}>
               Lists
             </Text>
           </View>

@@ -34,6 +34,7 @@
 		84B6FAA91E4DC26C008F4E28 /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B6FAA81E4DC26C008F4E28 /* HelveticaNeue.ttf */; };
 		84B6FAAB1E4DC27F008F4E28 /* times_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B6FAAA1E4DC27F008F4E28 /* times_0.ttf */; };
 		84B6FAAD1E4DC288008F4E28 /* ufonts.com_gillsans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B6FAAC1E4DC288008F4E28 /* ufonts.com_gillsans.ttf */; };
+		84B6FAAF1E4DC964008F4E28 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84B6FAAE1E4DC964008F4E28 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,6 +213,7 @@
 		84B6FAA81E4DC26C008F4E28 /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
 		84B6FAAA1E4DC27F008F4E28 /* times_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times_0.ttf; sourceTree = "<group>"; };
 		84B6FAAC1E4DC288008F4E28 /* ufonts.com_gillsans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufonts.com_gillsans.ttf; sourceTree = "<group>"; };
+		84B6FAAE1E4DC964008F4E28 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +416,7 @@
 		84B6FA501E4DBB2F008F4E28 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				84B6FAAE1E4DC964008F4E28 /* Ionicons.ttf */,
 				84B6FAAC1E4DC288008F4E28 /* ufonts.com_gillsans.ttf */,
 				84B6FAAA1E4DC27F008F4E28 /* times_0.ttf */,
 				84B6FAA81E4DC26C008F4E28 /* HelveticaNeue.ttf */,
@@ -695,6 +698,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B6FAAF1E4DC964008F4E28 /* Ionicons.ttf in Resources */,
 				84B6FAA11E4DC23E008F4E28 /* DIN Alternate.ttf in Resources */,
 				84B6FAA91E4DC26C008F4E28 /* HelveticaNeue.ttf in Resources */,
 				84B6FAA31E4DC248008F4E28 /* Entypo.ttf in Resources */,

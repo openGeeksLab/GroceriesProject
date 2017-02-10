@@ -15,6 +15,18 @@ import Header from './Header';
 import Footer from './Footer';
 import {addList} from '../actions';
 
+import {
+  HelveticaNeue,
+  Georgia,
+  Ionicons,
+  AmericanTypewriter,
+  Cochin,
+  // times_0,
+  DIN_Alternate,
+  ufonts_com_gillsans,
+  AvenirNext_Regular,
+} from 'AppFonts';
+
 export class NewListItem extends Component {
     render() {
       return (
@@ -87,7 +99,34 @@ export default class Main extends Component {
     return (
           <View style={styles.container}>
             <Header />
-            <View style={{ flex: 1, backgroundColor: 'black' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontFamily: HelveticaNeue, fontSize: 20, }}>
+                HelveticaNeue
+              </Text>
+              <Text style={{ fontFamily: Georgia, fontSize: 20, }}>
+                Georgia
+              </Text>
+              <Text style={{ fontFamily: Ionicons, fontSize: 20, }}>
+                Ionicons
+              </Text>
+              <Text style={{ fontFamily: AmericanTypewriter, fontSize: 20, }}>
+                AmericanTypewriter
+              </Text>
+              <Text style={{ fontFamily: Cochin, fontSize: 20, }}>
+                Cochin
+              </Text>
+              {/* <Text style={{ fontFamily: 'times_0' }}>
+                times_0
+              </Text> */}
+              <Text style={{ fontFamily: DIN_Alternate, fontSize: 20, }}>
+                DIN_Alternate
+              </Text>
+              {/* <Text style={{ fontFamily: ufonts_com_gillsans }}>
+                ufonts_com_gillsans
+              </Text> */}
+              <Text style={{ fontFamily: AvenirNext_Regular, fontSize: 20, }}>
+                AvenirNext_Regular
+              </Text>
             </View>
             <Footer />
             {/* <Header
