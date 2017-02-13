@@ -9,4 +9,5 @@
    STAR_ICON,
    TUTORIAL_ICON,
    LIFEBUOY_ICON,
+   ARROW_ICON,
  } from './img';

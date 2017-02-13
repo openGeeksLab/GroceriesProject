@@ -1,3 +1,17 @@
+const GREEN = '';
+
+import {
+  HelveticaNeue,
+  Georgia,
+  Ionicons,
+  AmericanTypewriter,
+  Cochin,
+  times,
+  DIN_Alternate,
+  gillsans,
+  AvenirNext_Regular,
+} from 'AppFonts';
+
 export const uiTheme ={
   palette: {
     backgroundColor: 'red',
@@ -10,8 +24,12 @@ export const uiTheme ={
     },
   },
   additional: {
-    main: {
-      backgroundColor: 'green',
+    fontFamilyAmericanTypewriter: {
+      fontFamily: AmericanTypewriter,
+    },
+    red: {
+      themeColor: '#FF6385',
+      color: '#E6E6E6',
     },
   },
 };
