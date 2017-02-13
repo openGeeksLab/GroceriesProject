@@ -35,17 +35,21 @@ class Settings extends Component {
         <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />
         <View style={{ flex: 1 }}>
           <View style={{ width, }}>
-            <TouchableOpacity style={{ width, height: 50, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={{ fontFamily: fontFamily.fontFamily, fontSize: 20 }}>
-                Theme
-              </Text>
-              <View style={{ flexDirection: 'row', }}>
-                <Text style={{ fontSize: 18 }}>
-                  Nametheme
+            <View style={{ width, height: 50, justifyContent: 'center' }}>
+              <TouchableOpacity style={{ width,flexDirection: 'row', borderWidth: 1, justifyContent: 'space-between'}}>
+                <Text style={{ fontFamily: fontFamily, fontSize: 20 }}>
+                  Theme
                 </Text>
-                <Image style={{ height: 20, width: 10 }} source={ARROW_ICON}/>
-              </View>
-            </TouchableOpacity>
+                <View style={{ justifyContent: 'center' }}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 18 }}>
+                      Nametheme
+                    </Text>
+                    <Image style={{ height: 20, width: 10 }} source={ARROW_ICON}/>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         <Footer leftIcon={TUTORIAL_ICON} centerIcon={LIFEBUOY_ICON} rightIcon={STAR_ICON} />
