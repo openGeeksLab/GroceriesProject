@@ -13,6 +13,8 @@ import {
   View
 } from 'react-native';
 
+import { uiTheme } from 'AppTheme';
+import { ThemeProvider } from 'react-native-material-ui';
 import Navigator from './app/components/Navigator';
 import {configureStore} from './app/store';
 
@@ -20,7 +22,9 @@ export default class GroceriesProject extends Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Navigator />
+        <ThemeProvider uiTheme={uiTheme}>
+          <Navigator />
+        </ThemeProvider>
       </Provider>
 
     );

@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {
   View,
@@ -43,6 +43,10 @@ export class NewListItem extends Component {
 }
 
 export default class Main extends Component {
+  static contextTypes = {
+    uiTheme: PropTypes.object.isRequired,
+  }
+
   state = {
     // edit: false,
     // add: false,
@@ -90,13 +94,15 @@ export default class Main extends Component {
 
 
   render() {
-    var renderNewLists = () => {
-      return this.props.newlists.map((newlist)=> {
-        return(
-          <NewListItem text={newlist.text} key={newlist.id} id={newlist.id}/>
-        )
-      })
-    }
+    // var renderNewLists = () => {
+    //   return this.props.newlists.map((newlist)=> {
+    //     return(
+    //       <NewListItem text={newlist.text} key={newlist.id} id={newlist.id}/>
+    //     )
+    //   })
+    // }
+
+    const main = this.context.uiTheme && this.context.uiTheme.main;
     return (
           <View style={styles.container}>
             <Header leftIcon={SETTINGS_ICON} leftAction={() => { this.props.navigator.push({ title: 'Settings' }) }} rightAction={() => {console.warn('MAIN')}} rightIcon={EDIT_ICON} title={'Lists'} />
