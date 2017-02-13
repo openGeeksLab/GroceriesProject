@@ -12,7 +12,7 @@ export default class NavigatorClass extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'Main',}}
+        initialRoute={{ title: 'Settings',}}
         renderScene={(route, navigator) => {
           switch (route.title) {
             case 'Main': return (<Main route={route} navigator={navigator} />);

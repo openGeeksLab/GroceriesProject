@@ -6,3 +6,4 @@ export const STAR_ICON = require('img/star.png');
 export const TUTORIAL_ICON = require('img/tutorial.png');
 export const LIFEBUOY_ICON = require('img/lifebuoy.png');
 export const ARROW_ICON = require('img/arrow.png');
+export const SELECTED_ICON = require('img/selected.png');

@@ -10,4 +10,5 @@
    TUTORIAL_ICON,
    LIFEBUOY_ICON,
    ARROW_ICON,
+   SELECTED_ICON,
  } from './img';
