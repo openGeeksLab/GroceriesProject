@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 const listTheme = [
   {
     name: 'Watermelon Red',
-    selected: false,
+    selected: true,
   },
   {
     name: 'Lettuce Green',
@@ -65,7 +65,7 @@ const listFonts = [
   },
   {
     name: 'AmericanTypewriter',
-    selected: false,
+    selected: true,
   },
   {
     name: 'Cochin',
@@ -95,9 +95,9 @@ class Settings extends Component {
   }
 
   state = {
-    nameTheme: 'Watermelon Red',
+    selectedTheme: 'Watermelon Red',
     openTheme: false,
-    nameFont: 'AmericanTypewriter',
+    selectedFont: 'AmericanTypewriter',
     openFont: false,
     fontSize: 20,
     alphabeticalSort: false,
@@ -108,57 +108,118 @@ class Settings extends Component {
 
   openListTheme = () => {
     this.setState({
-      openTheme: true,
+      openTheme: !this.state.openTheme,
       openFont: false,
     });
   }
 
   openListFont = () => {
     this.setState({
-      openFont: true,
+      openFont: !this.state.openFont,
       openTheme: false,
     });
   }
 
-  renderListTheme = () => {
+  renderListTheme = (item, index) => {
     const fontFamily = this.context.uiTheme.fontFamilyAmericanTypewriter.fontFamily;
-    return ( this.state.masTheme.map((items, index) =>
-      <View style={{ width, paddingTop: 10, paddingBottom: 10,  borderBottomWidth: 1, paddingHorizontal: 15, borderColor: '#c8c7cc', }}>
-        <Text
-          style={{ fontFamily, fontSize: 18, }}
+    return (
+      <View
+        key={index}
+        style={{
+          width,
+          borderBottomWidth: 1,
+          borderColor: '#c8c7cc',
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {this.sekectTheme(index)}}
+          style={{
+            width,
+            paddingTop: 10,
+            paddingBottom: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: 15,
+          }}
         >
-          {items.name}
-        </Text>
+          <Text
+            style={{ fontFamily, fontSize: 18, }}
+          >
+            {item.name}
+          </Text>
+          {
+            item.selected
+            &&
+            <View>
+              <Image source={SELECTED_ICON}/>
+            </View>
+          }
+        </TouchableOpacity>
       </View>
-    ));
+    );
   }
 
-  renderListFonts = () => {
+  renderListFonts = (item, index) => {
     const fontFamily = this.context.uiTheme.fontFamilyAmericanTypewriter.fontFamily;
-    return ( this.state.masFonts.map((items, index) =>
-      <View style={{ width, paddingTop: 10, flexDirection: 'row', paddingBottom: 10,  borderBottomWidth: 1, paddingHorizontal: 15, borderColor: '#c8c7cc', }}>
-        <Text
+    return (
+      <View
+        key={index}
+      >
+        <TouchableOpacity key={index} style={{
+          width,
+          paddingTop: 10,
+          flexDirection: 'row',
+          paddingBottom: 10,
+          justifyContent: 'space-between',
+          borderBottomWidth: 1,
+          paddingHorizontal: 15,
+          borderColor: '#c8c7cc', }}
           onPress={() => {this.selectFont(index)}}
-          style={{ fontFamily, fontSize: 18, }}
         >
-          {items.name}
-        </Text>
-        {
-          items.selected
-          &&
-          <View>
-            <Image source={SELECTED_ICON}/>
-          </View>
-        }
+          <Text
+            style={{ fontFamily, fontSize: 18, }}
+          >
+            {item.name}
+          </Text>
+          {
+            item.selected
+            &&
+            <View>
+              <Image source={SELECTED_ICON}/>
+            </View>
+          }
+        </TouchableOpacity>
       </View>
-    ));
+    );
   }
 
   selectFont = (index) => {
     var selectFontMas = this.state.masFonts;
+    for (let i=0;i<selectFontMas.length;i++){
+      if (selectFontMas[i].selected === true) {
+        selectFontMas[i].selected = false;
+      }
+    }
     selectFontMas[index].selected = true;
     this.setState({
       masFonts: selectFontMas,
+      openFont: false,
+      selectedFont: selectFontMas[index].name,
+    });
+  }
+
+  sekectTheme = (index) => {
+    var selectThemeMas = this.state.masTheme;
+    for (let i=0;i<selectThemeMas.length;i++){
+      if (selectThemeMas[i].selected === true) {
+        selectThemeMas[i].selected = false;
+      }
+    }
+    selectThemeMas[index].selected = true;
+    this.setState({
+      masTheme: selectThemeMas,
+      openTheme: false,
+      selectedTheme: selectThemeMas[index].name,
     });
   }
 
@@ -192,14 +253,14 @@ class Settings extends Component {
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ fontSize: 20, paddingRight: 10, }}>
-                      {this.state.nameTheme}
+                      {this.state.selectedTheme}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openTheme ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
                   </View>
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.openTheme ? this.renderListTheme() : null}
+            {this.state.openTheme && this.state.masTheme.map((item, index) => {return(this.renderListTheme(item, index))})}
           </View>
 
           <View style={{ width, }}>
@@ -216,14 +277,14 @@ class Settings extends Component {
                     <Text
                       style={{ fontSize: 20, paddingRight: 10, }}
                     >
-                      {this.state.nameFont}
+                      {this.state.selectedFont}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openFont ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
                   </View>
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.openFont ? this.renderListFonts() : null}
+            {this.state.openFont && this.state.masFonts.map((item, index) => {return(this.renderListFonts(item, index))})}
           </View>
 
           <View style={{ width, }}>
