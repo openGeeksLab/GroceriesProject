@@ -14,6 +14,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { AmericanTypewriter } from 'AppFonts';
+import { connect } from 'react-redux';
 
 const { width } = Dimensions.get('window').width;
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
 const listTheme = [
   {
     name: 'Watermelon Red',
-    selected: true,
+    selected: false,
   },
   {
     name: 'Lettuce Green',
@@ -35,7 +36,7 @@ const listTheme = [
   },
   {
     name: 'Popcorn White',
-    selected: false,
+    selected: true,
   },
   {
     name: 'Fresh Aqua Blue',
@@ -95,7 +96,7 @@ class Settings extends Component {
   }
 
   state = {
-    selectedTheme: 'Watermelon Red',
+    selectedTheme: 'Popcorn White',
     openTheme: false,
     selectedFont: 'AmericanTypewriter',
     openFont: false,
@@ -132,7 +133,7 @@ class Settings extends Component {
         }}
       >
         <TouchableOpacity
-          onPress={() => {this.sekectTheme(index)}}
+          onPress={() => {this.selectTheme(index)}}
           style={{
             width,
             paddingTop: 10,
@@ -164,6 +165,11 @@ class Settings extends Component {
     return (
       <View
         key={index}
+        style={{
+          width,
+          borderColor: '#c8c7cc',
+          borderBottomWidth: 1,
+        }}
       >
         <TouchableOpacity key={index} style={{
           width,
@@ -171,9 +177,7 @@ class Settings extends Component {
           flexDirection: 'row',
           paddingBottom: 10,
           justifyContent: 'space-between',
-          borderBottomWidth: 1,
-          paddingHorizontal: 15,
-          borderColor: '#c8c7cc', }}
+          paddingHorizontal: 15, }}
           onPress={() => {this.selectFont(index)}}
         >
           <Text
@@ -208,7 +212,7 @@ class Settings extends Component {
     });
   }
 
-  sekectTheme = (index) => {
+  selectTheme = (index) => {
     var selectThemeMas = this.state.masTheme;
     for (let i=0;i<selectThemeMas.length;i++){
       if (selectThemeMas[i].selected === true) {
@@ -292,12 +296,13 @@ class Settings extends Component {
               <View
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20,}}>
+                <Text style={{ fontFamily: fontFamily, fontSize: this.state.fontSize,}}>
                   Font Size
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity
+                      disabled={this.state.fontSize < 10}
                       onPress={() => {this.decrementFont()}}
                       style={{ borderWidth: 1, paddingVertical: 3, paddingHorizontal: 25, borderTopLeftRadius: 10, borderBottomLeftRadius: 10, }}
                     >
@@ -306,6 +311,7 @@ class Settings extends Component {
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      disabled={this.state.fontSize > 30}
                       onPress={() => {this.incrementFont()}}
                       style={{ borderWidth: 1, paddingVertical: 3, paddingHorizontal: 23, borderTopRightRadius: 10, borderBottomRightRadius: 10, }}
                     >
@@ -386,4 +392,4 @@ class Settings extends Component {
   }
 }
 
-module.exports = Settings;
+export default connect()(Settings);

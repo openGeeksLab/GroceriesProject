@@ -1,20 +1,9 @@
-import uuid from 'uuid';
+import { combineReducers } from 'redux';
 
-module.exports = (state, action) => {
-  switch(action.type) {
-    case 'ADD_LIST':
+import settings from './settings-reducers';
 
-      var newLists = [
-        ...state.newlists,
-        {
-          text: action.text,
-          id: uuid.v4()
-        }
-      ];
-      return {
-        newlists: newLists
-      }
-    default:
-      return state;
-  }
-}
+export const reducers = {
+  settings
+};
+
+export default combineReducers(reducers);
