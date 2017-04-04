@@ -6,15 +6,16 @@ import {
   Navigator,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { setFontFamily } from '../actions/settings-actions';
+import { setFontFamily, setFontSize } from '../actions/settings-actions';
 import Main from './Main';
 import Settings from './Settings';
 
 class NavigatorClass extends Component {
   componentWillMount() {
     this.props.dispatch(setFontFamily());
+    this.props.dispatch(setFontSize());
   }
-  
+
   render() {
     return (
       <Navigator

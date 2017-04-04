@@ -15,7 +15,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
-import { changeFontFamily } from '../actions/settings-actions';
+import { changeFontFamily, incrementFont, decrementFont } from '../actions/settings-actions';
 import {
   HelveticaNeue,
   Georgia,
@@ -211,13 +211,16 @@ class Settings extends Component {
           borderBottomWidth: 1,
         }}
       >
-        <TouchableOpacity key={index} style={{
-          width,
-          paddingTop: 10,
-          flexDirection: 'row',
-          paddingBottom: 10,
-          justifyContent: 'space-between',
-          paddingHorizontal: 15, }}
+        <TouchableOpacity
+          key={index}
+          style={{
+            width,
+            paddingTop: 10,
+            flexDirection: 'row',
+            paddingBottom: 10,
+            justifyContent: 'space-between',
+            paddingHorizontal: 15,
+          }}
           onPress={() => {this.selectFont(index)}}
         >
           <Text
@@ -260,21 +263,20 @@ class Settings extends Component {
     });
   }
 
-  incrementFont = () => {
-    this.setState({
-      fontSize: this.state.fontSize + 1
-    });
-  }
-
-  decrementFont = () => {
-    this.setState({
-      fontSize: this.state.fontSize - 1
-    });
-  }
+  // incrementFont = () => {
+  //   this.props.dispatch(incrementFont())
+  //   // this.setState({
+  //   //   fontSize: this.state.fontSize + 1
+  //   // });
+  // }
+  //
+  // decrementFont = () => {
+  //   this.setState({
+  //     fontSize: this.state.fontSize - 1
+  //   });
+  // }
 
   render() {
-    // AsyncStorage.getItem('fontFamily').then(fontFamily => { console.warn('FONTFAMILY', JSON.parse(fontFamily)) })
-    // const fontFamily = this.context.uiTheme.fontFamily && this.context.uiTheme.fontFamily.fontFamily;
     const { fontFamily } = this.props;
     return (
       <View style={styles.container}>
@@ -337,8 +339,8 @@ class Settings extends Component {
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity
-                      disabled={this.state.fontSize < 10}
-                      onPress={() => {this.decrementFont()}}
+                      disabled={this.props.fontSize < 10}
+                      onPress={() => {this.props.dispatch(decrementFont())}}
                       style={{ borderWidth: 1, paddingVertical: 3, paddingHorizontal: 25, borderTopLeftRadius: 10, borderBottomLeftRadius: 10, }}
                     >
                       <Text style={{ fontSize: 20,}}>
@@ -346,8 +348,8 @@ class Settings extends Component {
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      disabled={this.state.fontSize > 30}
-                      onPress={() => {this.incrementFont()}}
+                      disabled={this.props.fontSize > 30}
+                      onPress={() => {this.props.dispatch(incrementFont())}}
                       style={{ borderWidth: 1, paddingVertical: 3, paddingHorizontal: 23, borderTopRightRadius: 10, borderBottomRightRadius: 10, }}
                     >
                       <Text style={{ fontSize: 20, }}>
@@ -430,6 +432,7 @@ class Settings extends Component {
 mapStatetoProps = (state) => {
   return {
     fontFamily: state.settings.fontFamily,
+    fontSize: state.settings.fontSize,
   }
 }
 
