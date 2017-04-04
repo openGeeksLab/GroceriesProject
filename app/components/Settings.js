@@ -14,9 +14,19 @@ import { TUTORIAL_ICON, LIFEBUOY_ICON, STAR_ICON, ARROW_ICON, SELECTED_ICON } fr
 import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
-import { AmericanTypewriter } from 'AppFonts';
 import { connect } from 'react-redux';
 import { changeFontFamily } from '../actions/settings-actions';
+import {
+  HelveticaNeue,
+  Georgia,
+  Ionicons,
+  AmericanTypewriter,
+  Cochin,
+  times,
+  DIN_Alternate,
+  gillsans,
+  AvenirNext_Regular,
+} from 'AppFonts';
 
 const { width } = Dimensions.get('window').width;
 
@@ -93,9 +103,6 @@ const listFonts = [
 ];
 
 class Settings extends Component {
-  componentWillReceiveProps() {
-  }
-
   static contextTypes = {
     uiTheme: PropTypes.object.isRequired,
   }
@@ -103,13 +110,39 @@ class Settings extends Component {
   state = {
     selectedTheme: 'Popcorn White',
     openTheme: false,
-    selectedFont: 'AmericanTypewriter',
+    // selectedFont: this.props.fontFamily && this.props.fontFamily,
     openFont: false,
     fontSize: 20,
     alphabeticalSort: false,
     cloudSync: false,
     masFonts: listFonts,
     masTheme: listTheme,
+  }
+
+  setFontFamily() {
+    const { fontFamily } = this.props;
+    switch (fontFamily) {
+      case 'HelveticaNeue':
+        return HelveticaNeue;
+      case 'Georgia':
+        return Georgia;
+      case 'Ionicons':
+        return Ionicons;
+      case 'AmericanTypewriter':
+        return AmericanTypewriter;
+      case 'Cochin':
+        return Cochin;
+      case 'times':
+        return times;
+      case 'DIN_Alternate':
+        return DIN_Alternate;
+      case 'gillsans':
+        return gillsans;
+      case 'AvenirNext_Regular':
+          return AvenirNext_Regular;
+      default:
+        return AmericanTypewriter;
+    }
   }
 
   openListTheme = () => {
@@ -127,7 +160,8 @@ class Settings extends Component {
   }
 
   renderListTheme = (item, index) => {
-    const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
+    // const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
+    const { fontFamily } = this.props;
     return (
       <View
         key={index}
@@ -149,12 +183,12 @@ class Settings extends Component {
           }}
         >
           <Text
-            style={{ fontFamily, fontSize: 18, }}
+            style={{ fontFamily: this.setFontFamily(), fontSize: 18, }}
           >
             {item.name}
           </Text>
           {
-            item.selected
+            item.name === this.props.fontFamily
             &&
             <View>
               <Image source={SELECTED_ICON}/>
@@ -166,7 +200,8 @@ class Settings extends Component {
   }
 
   renderListFonts = (item, index) => {
-    const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
+    // const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
+    const { fontFamily } = this.props;
     return (
       <View
         key={index}
@@ -186,7 +221,7 @@ class Settings extends Component {
           onPress={() => {this.selectFont(index)}}
         >
           <Text
-            style={{ fontFamily, fontSize: 18, }}
+            style={{fontFamily: item.name, fontSize: 18, }}
           >
             {item.name}
           </Text>
@@ -204,17 +239,9 @@ class Settings extends Component {
 
   selectFont = (index) => {
     var selectFontMas = this.state.masFonts;
-    for (let i=0;i<selectFontMas.length;i++){
-      if (selectFontMas[i].selected === true) {
-        selectFontMas[i].selected = false;
-      }
-    }
     this.props.dispatch(changeFontFamily(selectFontMas[index].name));
-    selectFontMas[index].selected = true;
     this.setState({
-      masFonts: selectFontMas,
       openFont: false,
-      selectedFont: selectFontMas[index].name,
     });
   }
 
@@ -248,6 +275,7 @@ class Settings extends Component {
   render() {
     // AsyncStorage.getItem('fontFamily').then(fontFamily => { console.warn('FONTFAMILY', JSON.parse(fontFamily)) })
     // const fontFamily = this.context.uiTheme.fontFamily && this.context.uiTheme.fontFamily.fontFamily;
+    const { fontFamily } = this.props;
     return (
       <View style={styles.container}>
         <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />
@@ -258,12 +286,12 @@ class Settings extends Component {
                 onPress={() => {this.openListTheme()}}
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20 }}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20 }}>
                   Theme
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20, paddingRight: 10, }}>
+                    <Text style={{ fontSize: 20, fontFamily: this.setFontFamily(), paddingRight: 10, }}>
                       {this.state.selectedTheme}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openTheme ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
@@ -280,15 +308,15 @@ class Settings extends Component {
                 onPress={() => {this.openListFont()}}
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20 }}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20 }}>
                   Font
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
-                      style={{ fontSize: 20, paddingRight: 10, }}
+                      style={{ fontSize: 20, fontFamily: this.setFontFamily(), paddingRight: 10, }}
                     >
-                      {this.state.selectedFont}
+                      {this.props.fontFamily}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openFont ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
                   </View>
@@ -303,7 +331,7 @@ class Settings extends Component {
               <View
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: this.state.fontSize,}}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: this.state.fontSize,}}>
                   Font Size
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
@@ -337,7 +365,7 @@ class Settings extends Component {
               <View
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20,}}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20,}}>
                   Alphabetical Sort
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
@@ -352,7 +380,7 @@ class Settings extends Component {
 
 
           <View style={{ width, height: 60, paddingHorizontal: 15, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
-            <Text style={{ fontFamily: fontFamily, fontSize: 20, }}>
+            <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20, }}>
               Premium Features
             </Text>
           </View>
@@ -362,11 +390,11 @@ class Settings extends Component {
               <View
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20,}}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20,}}>
                   Unlock extra features
                 </Text>
                 <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderRadius: 5, paddingHorizontal: 10, paddingVertical: 2 }}>
-                  <Text style={{ fontFamily, fontSize: 20, }}>
+                  <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20, }}>
                     Go Premium
                   </Text>
                 </TouchableOpacity>
@@ -379,7 +407,7 @@ class Settings extends Component {
               <View
                 style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: fontFamily, fontSize: 20,}}>
+                <Text style={{ fontFamily: this.setFontFamily(), fontSize: 20,}}>
                   Cloud Sync
                 </Text>
                 <View style={{ justifyContent: 'center',}}>
@@ -399,4 +427,10 @@ class Settings extends Component {
   }
 }
 
-export default connect()(Settings);
+mapStatetoProps = (state) => {
+  return {
+    fontFamily: state.settings.fontFamily,
+  }
+}
+
+export default connect(mapStatetoProps)(Settings);

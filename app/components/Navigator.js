@@ -5,10 +5,16 @@ import {
   StyleSheet,
   Navigator,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { setFontFamily } from '../actions/settings-actions';
 import Main from './Main';
 import Settings from './Settings';
 
-export default class NavigatorClass extends Component {
+class NavigatorClass extends Component {
+  componentWillMount() {
+    this.props.dispatch(setFontFamily());
+  }
+  
   render() {
     return (
       <Navigator
@@ -39,3 +45,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default connect()(NavigatorClass);
