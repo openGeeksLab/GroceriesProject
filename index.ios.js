@@ -16,12 +16,12 @@ import {
 import { uiTheme } from 'AppTheme';
 import { ThemeProvider } from 'react-native-material-ui';
 import Navigator from './app/components/Navigator';
-import {configureStore} from './app/store';
+import store from './app/store';
 
 export default class GroceriesProject extends Component {
   render() {
     return (
-      <Provider store={configureStore()}>
+      <Provider store={store}>
         <ThemeProvider uiTheme={uiTheme}>
           <Navigator />
         </ThemeProvider>

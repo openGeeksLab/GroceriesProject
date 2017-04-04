@@ -14,7 +14,7 @@ import { SETTINGS_ICON, EDIT_ICON, CART_INACTIVE_ICON, LIST_INACTIVE_ICON  } fro
 
 import Header from './Header';
 import Footer from './Footer';
-import {addList} from '../actions';
+// import {addList} from '../actions';
 
 import {
   HelveticaNeue,

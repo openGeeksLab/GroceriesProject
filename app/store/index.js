@@ -1,13 +1,6 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducer from '../reducer';
+import thunk from 'redux-thunk';
 
-var defaultState = {
-  // newlists: []
-  fontSize: 20,
-  fontFamily: 'AmericanTypewriter',
-};
-
-exports.configureStore = (initialState=defaultState) => {
-  var store = createStore(reducer, initialState);
-  return store;
-}
+const store = createStore(reducer, applyMiddleware(thunk));
+export default store;

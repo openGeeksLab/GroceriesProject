@@ -8,6 +8,7 @@ import {
   Image,
   Switch,
   ScrollView,
+  AsyncStorage,
 } from 'react-native';
 import { TUTORIAL_ICON, LIFEBUOY_ICON, STAR_ICON, ARROW_ICON, SELECTED_ICON } from 'AppIcons';
 import Header from './Header';
@@ -15,6 +16,7 @@ import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { AmericanTypewriter } from 'AppFonts';
 import { connect } from 'react-redux';
+import { changeFontFamily } from '../actions/settings-actions';
 
 const { width } = Dimensions.get('window').width;
 
@@ -91,6 +93,9 @@ const listFonts = [
 ];
 
 class Settings extends Component {
+  componentWillReceiveProps() {
+  }
+
   static contextTypes = {
     uiTheme: PropTypes.object.isRequired,
   }
@@ -122,7 +127,7 @@ class Settings extends Component {
   }
 
   renderListTheme = (item, index) => {
-    const fontFamily = this.context.uiTheme.fontFamilyAmericanTypewriter.fontFamily;
+    const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
     return (
       <View
         key={index}
@@ -161,7 +166,7 @@ class Settings extends Component {
   }
 
   renderListFonts = (item, index) => {
-    const fontFamily = this.context.uiTheme.fontFamilyAmericanTypewriter.fontFamily;
+    const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
     return (
       <View
         key={index}
@@ -204,6 +209,7 @@ class Settings extends Component {
         selectFontMas[i].selected = false;
       }
     }
+    this.props.dispatch(changeFontFamily(selectFontMas[index].name));
     selectFontMas[index].selected = true;
     this.setState({
       masFonts: selectFontMas,
@@ -240,7 +246,8 @@ class Settings extends Component {
   }
 
   render() {
-    const fontFamily = this.context.uiTheme.fontFamilyAmericanTypewriter.fontFamily;
+    // AsyncStorage.getItem('fontFamily').then(fontFamily => { console.warn('FONTFAMILY', JSON.parse(fontFamily)) })
+    // const fontFamily = this.context.uiTheme.fontFamily && this.context.uiTheme.fontFamily.fontFamily;
     return (
       <View style={styles.container}>
         <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />

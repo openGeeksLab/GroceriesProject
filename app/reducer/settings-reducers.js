@@ -1,10 +1,10 @@
 import { actionTypes } from '../actions/settings-actions';
 
-// const initialState = {
-//
-// };
+const initialState = {
+  fontFamily: 'AmericanTypewriter',
+};
 
-export default function AppReducers(state, action) {
+export default function AppReducers(state = initialState, action) {
   switch (action.type) {
     case actionTypes.CHANGE_FONT_FAMILY:
       return {
