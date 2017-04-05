@@ -15,7 +15,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
-import { changeFontFamily } from '../actions/settings-actions';
+import { changeFontFamily, /* setFontSize, */ clearSettings, incrementFont, decrementFont } from '../actions/settings-actions';
 // import {
 //   HelveticaNeue,
 //   Georgia,
@@ -58,7 +58,7 @@ class Settings extends Component {
     openTheme: false,
     // selectedFont: this.props.fontFamily && this.props.fontFamily,
     openFont: false,
-    fontSize: this.props.fontSize ? this.props.fontSize : 18,
+    fontSize: this.props.fontSize,
     alphabeticalSort: false,
     cloudSync: false,
     masFonts: listFonts,
@@ -75,6 +75,14 @@ class Settings extends Component {
     this.setState({
       openFont: !this.state.openFont,
     });
+  }
+
+  onDonePress = () => {
+    AsyncStorage.setItem('fontSize', JSON.stringify(this.props.fontSize));
+  }
+
+  onCancelPress = () => {
+    this.props.dispatch(clearSettings())
   }
 
   renderListTheme = (item, index) => {
@@ -178,23 +186,11 @@ class Settings extends Component {
     });
   }
 
-  incrementFont = () => {
-    this.setState({
-      fontSize: this.state.fontSize + 1
-    })
-  }
-
-  decrementFont = () => {
-    this.setState({
-      fontSize: this.state.fontSize - 1
-    })
-  }
-
   render() {
     const { fontFamily, fontSize } = this.props;
     return (
       <View style={styles.container}>
-        <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />
+        <Header leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} />
         <ScrollView>
           <View>
             <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
@@ -257,8 +253,8 @@ class Settings extends Component {
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity
-                      disabled={this.props.fontSize < 16}
-                      onPress={() => {this.decrementFont()}}
+                      disabled={fontSize < 16}
+                      onPress={() => {this.props.dispatch(decrementFont())}}
                       style={{
                         borderWidth: 1,
                         paddingVertical: 5,
@@ -267,21 +263,21 @@ class Settings extends Component {
                         borderBottomLeftRadius: 10,
                         borderTopRightRadius: 2,
                         borderBottomRightRadius: 2,
-                        borderColor: this.props.fontSize < 16 ? 'grey' : 'blue',
+                        borderColor: fontSize < 16 ? 'grey' : 'blue',
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 20,
-                          color: this.props.fontSize < 16 ? 'grey' : 'blue',
+                          color: fontSize < 16 ? 'grey' : 'blue',
                         }}
                       >
                         -
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      disabled={this.props.fontSize > 22}
-                      onPress={() => {this.incrementFont()}}
+                      disabled={fontSize > 22}
+                      onPress={() => {this.props.dispatch(incrementFont())}}
                       style={{
                         borderWidth: 1,
                         marginLeft: -1,
@@ -291,13 +287,13 @@ class Settings extends Component {
                         borderBottomRightRadius: 10,
                         borderTopLeftRadius: 2,
                         borderBottomLeftRadius: 2,
-                        borderColor: this.props.fontSize > 22 ? 'grey' : 'blue',
+                        borderColor: fontSize > 22 ? 'grey' : 'blue',
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 20,
-                          color: this.props.fontSize > 22 ? 'grey' : 'blue',
+                          color: fontSize > 22 ? 'grey' : 'blue',
                         }}>
                         +
                       </Text>

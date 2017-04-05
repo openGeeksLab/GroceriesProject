@@ -6,7 +6,8 @@ export const actionTypes = {
   INCREMENT_FONT: 'INCREMENT_FONT',
   DECREMENT_FONT: 'DECREMENT_FONT',
   GET_FONT_SIZE: 'GET_FONT_SIZE',
-  SET_FONT_SIZE: 'SET_FONT_SIZE',
+  CLEAR_SETTINGS: 'CLEAR_SETTINGS',
+  CLEAR_SETTINGS_INITIAL: 'CLEAR_SETTINGS_INITIAL',
 };
 
 export const setFontFamily = () =>
@@ -42,25 +43,31 @@ export const getFontSize = () =>
     });
   }
 
-export const setFontSize = (fontSize) =>
+export const incrementFont = () =>
   (dispatch) => {
-    AsyncStorage.setItem('fontSize', JSON.stringify(fontSize));
     dispatch({
-      type: actionsTypes.SET_FONT_SIZE,
-      fontSize: fontSize
+      type: actionTypes.INCREMENT_FONT,
     })
   }
 
-// export const incrementFont = () =>
-//   (dispatch) => {
-//     dispatch({
-//       type: actionTypes.INCREMENT_FONT,
-//     })
-//   }
-//
-// export const decrementFont = () =>
-//   (dispatch) => {
-//     dispatch({
-//       type: actionTypes.DECREMENT_FONT,
-//     })
-//   }
+export const decrementFont = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.DECREMENT_FONT,
+    })
+  }
+
+export const clearSettings = () => {
+  AsyncStorage.getItem('fontSize').then(fontSize => {
+    if (fontSize) {
+      return {
+        type: actionTypes.CLEAR_SETTINGS,
+        fontSize: fontSize,
+      }
+    } else {
+      return {
+        type: actionTypes.CLEAR_SETTINGS_INITIAL,
+      }
+    }
+  })
+}
