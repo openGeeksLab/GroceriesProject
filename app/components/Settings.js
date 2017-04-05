@@ -28,7 +28,7 @@ import {
   AvenirNext_Regular,
 } from 'AppFonts';
 
-const { width } = Dimensions.get('window').width;
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
@@ -159,12 +159,11 @@ class Settings extends Component {
 
   renderListTheme = (item, index) => {
     // const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
-    const { fontFamily } = this.props;
+    const { fontFamily, fontSize } = this.props;
     return (
       <View
         key={index}
         style={{
-          width,
           borderBottomWidth: 1,
           borderColor: '#c8c7cc',
         }}
@@ -177,7 +176,8 @@ class Settings extends Component {
             paddingBottom: 10,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingHorizontal: 15,
+            paddingLeft: item.name === this.props.fontFamily ? 10 : 15,
+            paddingRight: 15,
           }}
         >
           <Text
@@ -212,16 +212,16 @@ class Settings extends Component {
           key={index}
           style={{
             width,
-            // paddingTop: 10,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingHorizontal: 15,
+            paddingLeft: item.name === this.props.fontFamily ? 8 : 15,
+            paddingRight: 15,
           }}
           onPress={() => {this.selectFont(index)}}
         >
-          <View style={{ backgroundColor: 'red', height: 40, justifyContent: 'center' }}>
+          <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
-              style={{fontFamily, fontSize, textAlign: 'justify', height: 30, }}
+              style={{fontFamily, fontSize, }}
             >
               {item.name}
             </Text>
@@ -229,7 +229,7 @@ class Settings extends Component {
           {
             item.name === this.props.fontFamily
             &&
-            <View>
+            <View style={{ justifyContent: 'center'}}>
               <Image source={SELECTED_ICON}/>
             </View>
           }
@@ -263,17 +263,19 @@ class Settings extends Component {
     return (
       <View style={styles.container}>
         <Header leftText={'Cancel'} leftAction={() => {this.props.navigator.pop()}} rightAction={() => {this.props.navigator.pop()}} rightText={'Done'} title={'Settings'} />
-        <ScrollView style={{ flex: 1, }}>
-          <View style={{ width, }}>
-            <View style={{ width, height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+        <ScrollView>
+          <View>
+            <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
               <TouchableOpacity
                 onPress={() => {this.openListTheme()}}
-                style={{ width, flexDirection: 'row', justifyContent: 'space-between', }}
+                style={{ flexDirection: 'row', justifyContent: 'space-between', }}
               >
-                <Text style={{ fontFamily: this.setFontFamily(), fontSize }}>
-                  Theme
-                </Text>
-                <View style={{ justifyContent: 'center' }}>
+                <View style={{ flex: 0.35 }}>
+                  <Text style={{ fontFamily: this.setFontFamily(), fontSize }}>
+                    Theme
+                  </Text>
+                </View>
+                <View style={{ flex: 0.65, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ fontSize, fontFamily: this.setFontFamily(), paddingRight: 10, }}>
                       {this.state.selectedTheme}
@@ -286,16 +288,18 @@ class Settings extends Component {
             {this.state.openTheme && this.state.masTheme.map((item, index) => {return(this.renderListTheme(item, index))})}
           </View>
 
-          <View style={{ width, }}>
-            <View style={{ width, height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+          <View>
+            <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
               <TouchableOpacity
                 onPress={() => {this.openListFont()}}
-                style={{ width, flexDirection: 'row', justifyContent: 'space-between', }}
+                style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily: this.setFontFamily(), fontSize }}>
-                  Font
-                </Text>
-                <View style={{ justifyContent: 'center' }}>
+                <View style={{ flex: 0.25 }}>
+                  <Text style={{ fontFamily: this.setFontFamily(), fontSize }}>
+                    Font
+                  </Text>
+                </View>
+                <View style={{ flex: 0.75, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
                       style={{ fontSize, fontFamily: this.setFontFamily(), paddingRight: 10, }}
@@ -311,9 +315,9 @@ class Settings extends Component {
           </View>
 
           <View style={{ width, }}>
-            <View style={{ width, height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View style={{ height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
               <View
-                style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+                style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
                 <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
                   Font Size
@@ -323,18 +327,46 @@ class Settings extends Component {
                     <TouchableOpacity
                       disabled={this.props.fontSize < 16}
                       onPress={() => {this.props.dispatch(decrementFont())}}
-                      style={{ borderWidth: 1, paddingVertical: 5, paddingHorizontal: 25, borderTopLeftRadius: 10, borderBottomLeftRadius: 10, }}
+                      style={{
+                        borderWidth: 1,
+                        paddingVertical: 5,
+                        paddingHorizontal: 25,
+                        borderTopLeftRadius: 10,
+                        borderBottomLeftRadius: 10,
+                        borderTopRightRadius: 2,
+                        borderBottomRightRadius: 2,
+                        borderColor: this.props.fontSize < 16 ? 'grey' : 'blue',
+                      }}
                     >
-                      <Text style={{ fontSize: 20,}}>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: this.props.fontSize < 16 ? 'grey' : 'blue',
+                        }}
+                      >
                         -
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      disabled={this.props.fontSize > 24}
+                      disabled={this.props.fontSize > 22}
                       onPress={() => {this.props.dispatch(incrementFont())}}
-                      style={{ borderWidth: 1, paddingVertical: 5, paddingHorizontal: 23, borderTopRightRadius: 10, borderBottomRightRadius: 10, }}
+                      style={{
+                        borderWidth: 1,
+                        marginLeft: -1,
+                        paddingVertical: 5,
+                        paddingHorizontal: 23,
+                        borderTopRightRadius: 10,
+                        borderBottomRightRadius: 10,
+                        borderTopLeftRadius: 2,
+                        borderBottomLeftRadius: 2,
+                        borderColor: this.props.fontSize > 22 ? 'grey' : 'blue',
+                      }}
                     >
-                      <Text style={{ fontSize: 20, }}>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: this.props.fontSize > 22 ? 'grey' : 'blue',
+                        }}>
                         +
                       </Text>
                     </TouchableOpacity>
@@ -344,20 +376,18 @@ class Settings extends Component {
             </View>
           </View>
 
-          <View style={{ width, }}>
-            <View style={{ width, height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
-              <View
-                style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
-                  Alphabetical Sort
-                </Text>
-                <View style={{ justifyContent: 'center' }}>
-                  <Switch
-                    onValueChange={(value) => this.setState({alphabeticalSort: value})}
-                    value={this.state.alphabeticalSort}
-                  />
-                </View>
+          <View style={{ height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
+                Alphabetical Sort
+              </Text>
+              <View style={{ justifyContent: 'center' }}>
+                <Switch
+                  onValueChange={(value) => this.setState({alphabeticalSort: value})}
+                  value={this.state.alphabeticalSort}
+                />
               </View>
             </View>
           </View>
@@ -368,36 +398,37 @@ class Settings extends Component {
               Premium Features
             </Text>
           </View>
-
-            <View style={{ width, height: 50, paddingLeft: 15,justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
-              >
+          <View style={{ paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <View style={{ flex: 0.55 }}>
                 <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
                   Unlock extra features
                 </Text>
-                <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderRadius: 5, paddingHorizontal: 10, paddingVertical: 2 }}>
-                  <Text style={{ fontFamily: this.setFontFamily(), fontSize, }}>
+              </View>
+              <View style={{ flex: 0.45 }}>
+                <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderColor: 'blue', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 3,}}>
+                  <Text style={{ textAlign: 'center', fontFamily: this.setFontFamily(), fontSize: 18, color: 'blue' }}>
                     Go Premium
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
+          </View>
 
-          <View style={{ width, }}>
-            <View style={{ width, height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
-              <View
-                style={{ width, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
-                  Cloud Sync
-                </Text>
-                <View style={{ justifyContent: 'center',}}>
-                  <Switch
-                    onValueChange={(value) => this.setState({cloudSync: value})}
-                    value={this.state.cloudSync}
-                  />
-                </View>
+          <View style={{ height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+            >
+              <Text style={{ fontFamily: this.setFontFamily(), fontSize,}}>
+                Cloud Sync
+              </Text>
+              <View style={{ justifyContent: 'center',}}>
+                <Switch
+                  onValueChange={(value) => this.setState({cloudSync: value})}
+                  value={this.state.cloudSync}
+                />
               </View>
             </View>
           </View>
