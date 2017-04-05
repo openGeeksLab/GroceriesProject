@@ -27,13 +27,13 @@ export default function AppReducers(state = initialState, action) {
       AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize + 1));
       return {
         ...state,
-        fontFamily: state.fontSize + 1
+        fontSize: state.fontSize + 1
       }
     case actionTypes.DECREMENT_FONT:
       AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize - 1));
       return {
         ...state,
-        fontFamily: state.fontSize - 1
+        fontSize: state.fontSize - 1
       }
     default:
       return state;
