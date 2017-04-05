@@ -18,23 +18,23 @@ export default function AppReducers(state = initialState, action) {
         ...state,
         fontFamily: action.fontFamily,
       };
-    case actionTypes.SET_FONT_SIZE:
+    case actionTypes.GET_FONT_SIZE:
       return {
         ...state,
         fontSize: action.fontSize
       }
-    case actionTypes.INCREMENT_FONT:
-      AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize + 1));
-      return {
-        ...state,
-        fontSize: state.fontSize + 1
-      }
-    case actionTypes.DECREMENT_FONT:
-      AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize - 1));
-      return {
-        ...state,
-        fontSize: state.fontSize - 1
-      }
+    // case actionTypes.INCREMENT_FONT:
+    //   AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize + 1));
+    //   return {
+    //     ...state,
+    //     fontSize: state.fontSize + 1
+    //   }
+    // case actionTypes.DECREMENT_FONT:
+    //   AsyncStorage.setItem('fontSize', JSON.stringify(state.fontSize - 1));
+    //   return {
+    //     ...state,
+    //     fontSize: state.fontSize - 1
+    //   }
     default:
       return state;
   }

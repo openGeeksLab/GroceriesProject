@@ -10,53 +10,54 @@ import {
   Platform,
 } from 'react-native';
 import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
-import { HelveticaNeue, Cochin } from 'AppFonts';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   header:{
-    marginTop: 26,
+    marginTop: Platform.OS === 'android' ? 0 : 26,
     borderWidth: 1,
     borderColor: 'lightgrey',
     backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+    height: 60,
   },
 });
 
-export default class Header extends Component {
-
+class Header extends Component {
   renderLeftView = () => {
-    const { leftIcon, leftText } = this.props;
+    const { leftIcon, leftText, fontFamily, fontSize } = this.props;
     if (leftIcon) {
       return (<Image style={{ width: 25, height: 25 }} source={leftIcon}/>);
     }
-    return(<Text style={{ fontFamily: HelveticaNeue, color: 'blue', fontSize: 22 }}>{leftText}</Text>);
+    return(<Text style={{ fontFamily, color: 'blue', fontSize: 18 }}>{leftText}</Text>);
   }
 
   renderRightView = () => {
-    const { rightIcon, rightText } = this.props;
+    const { rightIcon, rightText, fontFamily, fontSize } = this.props;
     if (rightIcon) {
       return(<Image style={{ width: 25, height: 25 }} source={rightIcon}/>);
     }
-    return (<Text style={{ fontFamily: HelveticaNeue, color: 'blue', fontSize: 22 }}>{rightText}</Text>);
+    return (<Text style={{ fontFamily, color: 'blue', fontSize: 18 }}>{rightText}</Text>);
   }
 
   render() {
-    const { leftIcon, leftText, rightIcon, rightText, title, } = this.props;
+    const { leftIcon, leftText, rightIcon, rightText, title, fontFamily, fontSize } = this.props;
 
     return (
       <View style={styles.header}>
-        <View style={{ marginHorizontal: 15, flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, paddingBottom: 15 }}>
+        <View style={{ marginHorizontal: 15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', /* marginTop: 15, paddingBottom: 15 */ }}>
           <View>
-            <TouchableOpacity style={{ width: 70 }} onPress={() => {this.props.leftAction()}}>
+            <TouchableOpacity style={{ width: 75 }} onPress={() => {this.props.leftAction()}}>
               {this.renderLeftView()}
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={{ fontSize:22, fontFamily: HelveticaNeue}}>
+            <Text style={{ fontSize, fontFamily}}>
               {title}
             </Text>
           </View>
           <View>
-            <TouchableOpacity style={{ width: 70, alignItems: 'flex-end' }} onPress={() => {this.props.rightAction()}}>
+            <TouchableOpacity style={{ width: 75, alignItems: 'flex-end' }} onPress={() => {this.props.rightAction()}}>
               {this.renderRightView()}
             </TouchableOpacity>
           </View>
@@ -74,3 +75,12 @@ Header.propTypes = {
   leftAction: PropTypes.func,
   rightAction: PropTypes.func,
 };
+
+mapStatetoProps = (state) => {
+  return {
+    fontFamily: state.settings.fontFamily,
+    fontSize: state.settings.fontSize,
+  }
+}
+
+export default connect(mapStatetoProps)(Header);
