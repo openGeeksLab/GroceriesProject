@@ -26,7 +26,7 @@ import {
 
 const styles = StyleSheet.create({
   header:{
-    marginTop: Platform.OS === 'android' ? 0 : 26,
+    // marginTop: Platform.OS === 'android' ? 0 : 26,
     borderWidth: 1,
     borderColor: 'lightgrey',
     backgroundColor: '#f5f5f5',
