@@ -32,10 +32,11 @@ const styles = StyleSheet.create({
 export default class Footer extends Component {
 
   renderLeftView = () => {
-    if (this.props.leftIcon) {
+    const { tintColor, leftIcon } = this.props;
+    if (leftIcon) {
       return (
         <TouchableOpacity style={styles.touchOpacityFooter}>
-          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.leftIcon}/>
+          <Image style={[styles.imageFooter, {tintColor}]} resizeMode={'contain'} source={this.props.leftIcon}/>
         </TouchableOpacity>
       );
     }
@@ -43,10 +44,11 @@ export default class Footer extends Component {
   }
 
   renderCenterView = () => {
-    if (this.props.centerIcon) {
+    const { tintColor, centerIcon } = this.props;
+    if (centerIcon) {
       return (
         <TouchableOpacity style={styles.touchOpacityFooter}>
-          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.centerIcon}/>
+          <Image style={[styles.imageFooter, {tintColor}]} resizeMode={'contain'} source={this.props.centerIcon}/>
         </TouchableOpacity>
       );
     }
@@ -54,10 +56,11 @@ export default class Footer extends Component {
   }
 
   renderRightView = () => {
-    if (this.props.rightIcon) {
+    const { tintColor, rightIcon } = this.props;
+    if (rightIcon) {
       return (
         <TouchableOpacity style={styles.touchOpacityFooter}>
-          <Image style={styles.imageFooter} resizeMode={'contain'} source={this.props.rightIcon}/>
+          <Image style={[styles.imageFooter, {tintColor}]} resizeMode={'contain'} source={this.props.rightIcon}/>
         </TouchableOpacity>
       );
     }

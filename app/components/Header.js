@@ -37,23 +37,23 @@ const styles = StyleSheet.create({
 
 class Header extends Component {
   renderLeftView = () => {
-    const { leftIcon, leftText, fontFamily, fontSize } = this.props;
+    const { leftIcon, leftText, fontFamily, fontSize, color, tintColor } = this.props;
     if (leftIcon) {
-      return (<Image style={{ width: 25, height: 25 }} source={leftIcon}/>);
+      return (<Image style={{ width: 25, height: 25, tintColor }} source={leftIcon}/>);
     }
-    return(<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color: 'blue', fontSize: 18 }}>{leftText}</Text>);
+    return(<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color, fontSize: 18 }}>{leftText}</Text>);
   }
 
   renderRightView = () => {
-    const { rightIcon, rightText, fontFamily, fontSize } = this.props;
+    const { rightIcon, rightText, fontFamily, fontSize, color, tintColor } = this.props;
     if (rightIcon) {
-      return(<Image style={{ width: 25, height: 25 }} source={rightIcon}/>);
+      return(<Image style={{ width: 25, height: 25, tintColor }} source={rightIcon}/>);
     }
-    return (<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color: 'blue', fontSize: 18 }}>{rightText}</Text>);
+    return (<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color, fontSize: 18 }}>{rightText}</Text>);
   }
 
   render() {
-    const { leftIcon, leftText, rightIcon, rightText, title, fontFamily, fontSize } = this.props;
+    const { leftIcon, leftText, rightIcon, rightText, title, fontFamily, fontSize, color } = this.props;
 
     return (
       <View style={styles.header}>
@@ -64,7 +64,7 @@ class Header extends Component {
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily)}}>
+            <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), color: color}}>
               {title}
             </Text>
           </View>

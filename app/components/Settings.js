@@ -68,6 +68,7 @@ class Settings extends Component {
     this.setState({
       fontSize: props.fontSize,
       fontFamily: props.fontFamily,
+      theme: props.theme,
     })
   }
 
@@ -148,7 +149,7 @@ class Settings extends Component {
           {
             item.name === this.state.theme
             &&
-            <View>
+            <View style={{ justifyContent: 'center'}}>
               <Image source={SELECTED_ICON}/>
             </View>
           }
@@ -203,24 +204,12 @@ class Settings extends Component {
     this.setState({
       fontFamily: selectFontMas[index].name,
     })
-    // this.props.dispatch(changeFontFamily(selectFontMas[index].name));
   }
 
   selectTheme = (index) => {
     this.setState({
       theme: listTheme[index].name,
     })
-    // var selectThemeMas = listTheme;
-    // for (let i=0;i<selectThemeMas.length;i++){
-    //   if (selectThemeMas[i].selected === true) {
-    //     selectThemeMas[i].selected = false;
-    //   }
-    // }
-    // selectThemeMas[index].selected = true;
-    // this.setState({
-    //   openTheme: false,
-    //   selectedTheme: selectThemeMas[index].name,
-    // });
   }
 
   render() {
@@ -228,7 +217,7 @@ class Settings extends Component {
     return (
       <View style={[styles.container, { backgroundColor: getColor(theme).backgroundColor }]}>
         {Platform.OS === 'ios' && <StatusBar /> }
-        <Header color={getColor(theme).backgroundColor} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
+        <Header color={getColor(theme).colorHeaderAndFooter} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
         <ScrollView>
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
             <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
@@ -325,13 +314,13 @@ class Settings extends Component {
                         borderBottomRightRadius: 10,
                         borderTopLeftRadius: 2,
                         borderBottomLeftRadius: 2,
-                        borderColor: fontSize > 22 ? 'grey' : 'blue',
+                        borderColor: fontSize > 22 ? 'grey' : getColor(theme).colorButtons,
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 20,
-                          color: fontSize > 22 ? 'grey' : 'blue',
+                          color: fontSize > 22 ? 'grey' : getColor(theme).colorButtons,
                         }}>
                         +
                       </Text>
@@ -374,7 +363,7 @@ class Settings extends Component {
                 </Text>
               </View>
               <View style={{ flex: 0.45 }}>
-                <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderColor: 'blue', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 3,}}>
+                <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderColor: getColor(theme).colorButtons, borderRadius: 5, paddingHorizontal: 10, paddingVertical: 3,}}>
                   <Text style={{ textAlign: 'center', fontFamily: getFontFamilyFromName(fontFamily), fontSize: 18, color: getColor(theme).colorButtons }}>
                     Go Premium
                   </Text>
@@ -400,7 +389,7 @@ class Settings extends Component {
           </View>
 
         </ScrollView>
-        <Footer leftIcon={TUTORIAL_ICON} centerIcon={LIFEBUOY_ICON} tintColor={getColor(theme).backgroundColor} rightIcon={STAR_ICON} />
+        <Footer leftIcon={TUTORIAL_ICON} centerIcon={LIFEBUOY_ICON} tintColor={getColor(theme).colorHeaderAndFooter} rightIcon={STAR_ICON} />
     </View>
     );
   }

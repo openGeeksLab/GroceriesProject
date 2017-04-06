@@ -40,6 +40,7 @@ export const getColor = (colorName) => {
     color: 'black',
     backgroundColor: '#ffffff',
     colorButtons: 'blue',
+    colorHeaderAndFooter: 'black',
   };
   switch (colorName) {
     case 'Watermelon Red':
@@ -47,6 +48,7 @@ export const getColor = (colorName) => {
         color: 'white',
         backgroundColor: '#d12c56',
         colorButtons: 'white',
+        colorHeaderAndFooter: '#d12c56',
       };
       return color;
     case 'Popcorn White':
@@ -56,6 +58,7 @@ export const getColor = (colorName) => {
         color: 'white',
         backgroundColor: '#70b226',
         colorButtons: 'white',
+        colorHeaderAndFooter: '#70b226',
       };
       return color;
     case 'Teflon Grey':
@@ -63,6 +66,7 @@ export const getColor = (colorName) => {
         color: '#d3d3d3',
         backgroundColor: '#323232',
         colorButtons: 'white',
+        colorHeaderAndFooter: '#323232',
       };
       return color;
     case 'Fresh Aqua Blue':
@@ -70,6 +74,7 @@ export const getColor = (colorName) => {
         color: 'white',
         backgroundColor: '#30c4c9',
         colorButtons: 'white',
+        colorHeaderAndFooter: '#30c4c9',
       };
       return color;
     case 'Banana Yellow':
@@ -77,6 +82,7 @@ export const getColor = (colorName) => {
         color: 'white',
         backgroundColor: '#ffe135',
         colorButtons: 'white',
+        colorHeaderAndFooter: '#ffe135',
       };
       return color;
     default:
