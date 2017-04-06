@@ -24,7 +24,7 @@ export const setFontFamily = () =>
 
 export const changeFontFamily = (fontFamily) =>
   (dispatch) => {
-    AsyncStorage.setItem('fontFamily', JSON.stringify(fontFamily));
+    // AsyncStorage.setItem('fontFamily', JSON.stringify(fontFamily));
     dispatch({
       type: actionTypes.CHANGE_FONT_FAMILY,
       fontFamily,
@@ -58,16 +58,29 @@ export const decrementFont = () =>
   }
 
 export const clearSettings = () => {
-  AsyncStorage.getItem('fontSize').then(fontSize => {
-    if (fontSize) {
-      return {
-        type: actionTypes.CLEAR_SETTINGS,
-        fontSize: fontSize,
-      }
-    } else {
-      return {
-        type: actionTypes.CLEAR_SETTINGS_INITIAL,
-      }
-    }
-  })
+  AsyncStorage.getAllKeys((err,keys) => {
+    AsyncStorage.multiGet(keys, (err, stores) => {
+      stores.map((store, i) => {
+        if (store[0] === 'fontSize' || store[0] === 'fontFamily') {
+
+        } else {
+          return {
+            type: actionTypes.CLEAR_SETTINGS_INITIAL,
+          };
+        }
+      });
+    });
+  });
+  // AsyncStorage.getItem('fontSize').then(fontSize => {
+  //   if (fontSize) {
+  //     return {
+  //       type: actionTypes.CLEAR_SETTINGS,
+  //       fontSize: fontSize,
+  //     }
+  //   } else {
+  //     return {
+  //       type: actionTypes.CLEAR_SETTINGS_INITIAL,
+  //     }
+  //   }
+  // })
 }

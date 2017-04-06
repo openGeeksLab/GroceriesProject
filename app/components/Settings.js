@@ -49,6 +49,9 @@ const listFonts = [
 ];
 
 class Settings extends Component {
+  componentWillMount() {
+    AsyncStorage.setItem('LOL', 'LOL')
+  }
   static contextTypes = {
     uiTheme: PropTypes.object.isRequired,
   }
@@ -79,6 +82,7 @@ class Settings extends Component {
 
   onDonePress = () => {
     AsyncStorage.setItem('fontSize', JSON.stringify(this.props.fontSize));
+    AsyncStorage.setItem('fontFamily', JSON.stringify(this.props.fontFamily));
   }
 
   onCancelPress = () => {
@@ -188,6 +192,15 @@ class Settings extends Component {
 
   render() {
     const { fontFamily, fontSize } = this.props;
+    // AsyncStorage.getAllKeys((err,keys) => {
+    //   AsyncStorage.multiGet(keys, (err, stores) => {
+    //     stores.map((store, i) => {
+    //       if (store[0] === 'fontSize' || store[0] === 'fontFamily') {
+    //         console.warn('HERETRUE', JSON.parse(store[1]));
+    //       }
+    //     })
+    //   })
+    // })
     return (
       <View style={styles.container}>
         <Header leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} />
