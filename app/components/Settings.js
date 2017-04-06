@@ -15,7 +15,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
-import { changeFontFamily, /* setFontSize, */ clearSettings, setFontSize } from '../actions/settings-actions';
+import { setFontFamily, /* setFontSize, */ clearSettings, setFontSize } from '../actions/settings-actions';
 import {
   HelveticaNeue,
   Georgia,
@@ -27,7 +27,7 @@ import {
   gillsans,
   AvenirNext_Regular,
 } from 'AppFonts';
-import { getFontFamilyFromName } from '../utils/utils';
+import { getFontFamilyFromName, getColor } from '../utils/utils';
 
 const width = Dimensions.get('window').width;
 
@@ -85,13 +85,14 @@ class Settings extends Component {
 
   onDonePress = () => {
     this.props.dispatch(setFontSize(this.state.fontSize));
-    AsyncStorage.setItem('fontSize', JSON.stringify(this.state));
+    this.props.dispatch(setFontFamily(this.state.fontFamily));
+    AsyncStorage.setItem('state', JSON.stringify(this.state));
     // AsyncStorage.setItem('fontSize', JSON.stringify(this.props.fontSize));
     // AsyncStorage.setItem('fontFamily', JSON.stringify(this.props.fontFamily));
   }
 
   onCancelPress = () => {
-    this.props.dispatch(clearSettings())
+    // this.props.dispatch(clearSettings())
   }
 
   incrementFont = () => {
@@ -125,7 +126,7 @@ class Settings extends Component {
             paddingBottom: 10,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingLeft: item.name === this.props.fontFamily ? 10 : 15,
+            paddingLeft: item.name === this.state.fontFamily ? 10 : 15,
             paddingRight: 15,
           }}
         >
@@ -135,7 +136,7 @@ class Settings extends Component {
             {item.name}
           </Text>
           {
-            item.name === this.props.fontFamily
+            item.name === this.state.fontFamily
             &&
             <View>
               <Image source={SELECTED_ICON}/>
@@ -163,7 +164,7 @@ class Settings extends Component {
             width,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingLeft: item.name === this.props.fontFamily ? 8 : 15,
+            paddingLeft: item.name === this.state.fontFamily ? 8 : 15,
             paddingRight: 15,
           }}
           onPress={() => {this.selectFont(index)}}
@@ -176,7 +177,7 @@ class Settings extends Component {
             </Text>
           </View>
           {
-            item.name === this.props.fontFamily
+            item.name === this.state.fontFamily
             &&
             <View style={{ justifyContent: 'center'}}>
               <Image source={SELECTED_ICON}/>
@@ -255,7 +256,7 @@ class Settings extends Component {
                     <Text
                       style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, paddingRight: 10, }}
                     >
-                      {this.props.fontFamily}
+                      {this.state.fontFamily}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openFont ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
                   </View>

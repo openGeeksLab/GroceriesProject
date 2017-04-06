@@ -24,13 +24,32 @@ export const getFontFamilyFromName = (fontFamily) => {
       return Cochin;
     case 'times':
       return times;
-    case 'DIN_Alternate':
+    case 'DIN Alternate':
       return DIN_Alternate;
-    case 'gillsans':
+    case 'Gill Sans':
       return gillsans;
-    case 'AvenirNext_Regular':
+    case 'AvenirNext-Regular':
         return AvenirNext_Regular;
     default:
       return AmericanTypewriter;
+  }
+}
+
+export const getColor = (colorName) => {
+  color = {
+    color: 'black',
+    backgroundColor: '#f8eac9',
+  };
+  switch (colorName) {
+    case 'Watermelon Red':
+      color = {
+        color: 'white',
+        backgroundColor: '#d12c56'
+      };
+      return color;
+    case 'Popcorn White':
+      return color;
+    default:
+      return color;
   }
 }
