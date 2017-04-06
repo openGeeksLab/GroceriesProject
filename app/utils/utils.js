@@ -10,7 +10,7 @@ import {
   AvenirNext_Regular,
 } from 'AppFonts';
 
-export const setFontFamily = (fontFamily) => {
+export const getFontFamilyFromName = (fontFamily) => {
   switch (fontFamily) {
     case 'HelveticaNeue':
       return HelveticaNeue;

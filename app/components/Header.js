@@ -11,6 +11,18 @@ import {
 } from 'react-native';
 import { SETTINGS_ICON, EDIT_ICON, } from 'AppIcons';
 import { connect } from 'react-redux';
+import { getFontFamilyFromName } from '../utils/utils';
+import {
+  HelveticaNeue,
+  Georgia,
+  Ionicons,
+  AmericanTypewriter,
+  Cochin,
+  times,
+  DIN_Alternate,
+  gillsans,
+  AvenirNext_Regular,
+} from 'AppFonts';
 
 const styles = StyleSheet.create({
   header:{
@@ -29,7 +41,7 @@ class Header extends Component {
     if (leftIcon) {
       return (<Image style={{ width: 25, height: 25 }} source={leftIcon}/>);
     }
-    return(<Text style={{ fontFamily, color: 'blue', fontSize: 18 }}>{leftText}</Text>);
+    return(<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color: 'blue', fontSize: 18 }}>{leftText}</Text>);
   }
 
   renderRightView = () => {
@@ -37,7 +49,7 @@ class Header extends Component {
     if (rightIcon) {
       return(<Image style={{ width: 25, height: 25 }} source={rightIcon}/>);
     }
-    return (<Text style={{ fontFamily, color: 'blue', fontSize: 18 }}>{rightText}</Text>);
+    return (<Text style={{ fontFamily: getFontFamilyFromName(fontFamily), color: 'blue', fontSize: 18 }}>{rightText}</Text>);
   }
 
   render() {
@@ -52,7 +64,7 @@ class Header extends Component {
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={{ fontSize, fontFamily}}>
+            <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily)}}>
               {title}
             </Text>
           </View>

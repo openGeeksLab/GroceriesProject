@@ -32,12 +32,12 @@ export const changeFontFamily = (fontFamily) =>
 
 export const getFontSize = () =>
   (dispatch) => {
-    AsyncStorage.getItem('fontSize').then(fontSize => {
-      if (fontSize) {
-        console.warn(fontSize);
+    AsyncStorage.getItem('fontSize').then(state => {
+      if (state) {
+        const parsedState = JSON.parse(state);
         dispatch({
           type: actionTypes.GET_FONT_SIZE,
-          fontSize: JSON.parse(fontSize),
+          fontSize: parsedState.fontSize,
         });
       }
     });

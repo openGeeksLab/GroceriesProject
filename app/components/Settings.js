@@ -16,17 +16,18 @@ import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
 import { changeFontFamily, /* setFontSize, */ clearSettings, setFontSize } from '../actions/settings-actions';
-// import {
-//   HelveticaNeue,
-//   Georgia,
-//   Ionicons,
-//   AmericanTypewriter,
-//   Cochin,
-//   times,
-//   DIN_Alternate,
-//   gillsans,
-//   AvenirNext_Regular,
-// } from 'AppFonts';
+import {
+  HelveticaNeue,
+  Georgia,
+  Ionicons,
+  AmericanTypewriter,
+  Cochin,
+  times,
+  DIN_Alternate,
+  gillsans,
+  AvenirNext_Regular,
+} from 'AppFonts';
+import { getFontFamilyFromName } from '../utils/utils';
 
 const width = Dimensions.get('window').width;
 
@@ -53,11 +54,19 @@ class Settings extends Component {
     uiTheme: PropTypes.object.isRequired,
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      fontSize: props.fontSize,
+      fontFamily: props.fontFamily,
+    })
+  }
+
   state = {
     selectedTheme: 'Popcorn White',
     openTheme: false,
     openFont: false,
     fontSize: this.props.fontSize,
+    fontFamily: this.props.fontFamily,
     alphabeticalSort: false,
     cloudSync: false,
   }
@@ -98,9 +107,7 @@ class Settings extends Component {
   }
 
   renderListTheme = (item, index) => {
-    // const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
-    const { fontFamily } = this.props;
-    const { fontSize } = this.state;
+    const { fontSize, fontFamily } = this.state;
 
     return (
       <View
@@ -123,7 +130,7 @@ class Settings extends Component {
           }}
         >
           <Text
-            style={{ fontFamily, fontSize, }}
+            style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, }}
           >
             {item.name}
           </Text>
@@ -140,8 +147,7 @@ class Settings extends Component {
   }
 
   renderListFonts = (item, index) => {
-    const { fontFamily } = this.props;
-    const { fontSize } = this.state;
+    const { fontSize, fontFamily } = this.state;
     return (
       <View
         key={index}
@@ -164,7 +170,7 @@ class Settings extends Component {
         >
           <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
-              style={{fontFamily, fontSize, }}
+              style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, }}
             >
               {item.name}
             </Text>
@@ -183,7 +189,10 @@ class Settings extends Component {
 
   selectFont = (index) => {
     var selectFontMas = listFonts;
-    this.props.dispatch(changeFontFamily(selectFontMas[index].name));
+    this.setState({
+      fontFamily: selectFontMas[index].name,
+    })
+    // this.props.dispatch(changeFontFamily(selectFontMas[index].name));
   }
 
   selectTheme = (index) => {
@@ -201,18 +210,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { fontFamily } = this.props;
-    const { fontSize } = this.state;
-    console.warn(fontSize);
-    // AsyncStorage.getAllKeys((err,keys) => {
-    //   AsyncStorage.multiGet(keys, (err, stores) => {
-    //     stores.map((store, i) => {
-    //       if (store[0] === 'fontSize' || store[0] === 'fontFamily') {
-    //         console.warn('HERETRUE', JSON.parse(store[1]));
-    //       }
-    //     })
-    //   })
-    // })
+    const { fontSize, fontFamily } = this.state;
     return (
       <View style={styles.container}>
         <Header leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
@@ -224,13 +222,13 @@ class Settings extends Component {
                 style={{ flexDirection: 'row', justifyContent: 'space-between', }}
               >
                 <View style={{ flex: 0.35 }}>
-                  <Text style={{ fontFamily, fontSize }}>
+                  <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize }}>
                     Theme
                   </Text>
                 </View>
                 <View style={{ flex: 0.65, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ fontSize, fontFamily, paddingRight: 10, }}>
+                    <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), paddingRight: 10, }}>
                       {this.state.selectedTheme}
                     </Text>
                     <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openTheme ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
@@ -248,14 +246,14 @@ class Settings extends Component {
                 style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
                 <View style={{ flex: 0.25 }}>
-                  <Text style={{ fontFamily, fontSize }}>
+                  <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize }}>
                     Font
                   </Text>
                 </View>
                 <View style={{ flex: 0.75, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
-                      style={{ fontSize, fontFamily, paddingRight: 10, }}
+                      style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, paddingRight: 10, }}
                     >
                       {this.props.fontFamily}
                     </Text>
@@ -272,7 +270,7 @@ class Settings extends Component {
               <View
                 style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                <Text style={{ fontFamily, fontSize,}}>
+                <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize,}}>
                   Font Size
                 </Text>
                 <View style={{ justifyContent: 'center' }}>
@@ -333,7 +331,7 @@ class Settings extends Component {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
             >
-              <Text style={{ fontFamily, fontSize,}}>
+              <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize,}}>
                 Alphabetical Sort
               </Text>
               <View style={{ justifyContent: 'center' }}>
@@ -347,7 +345,7 @@ class Settings extends Component {
 
 
           <View style={{ width, height: 60, paddingHorizontal: 15, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
-            <Text style={{ fontFamily, fontSize, }}>
+            <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, }}>
               Premium Features
             </Text>
           </View>
@@ -356,13 +354,13 @@ class Settings extends Component {
               style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
             >
               <View style={{ flex: 0.55 }}>
-                <Text style={{ fontFamily, fontSize,}}>
+                <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize,}}>
                   Unlock extra features
                 </Text>
               </View>
               <View style={{ flex: 0.45 }}>
                 <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderColor: 'blue', borderRadius: 5, paddingHorizontal: 10, paddingVertical: 3,}}>
-                  <Text style={{ textAlign: 'center', fontFamily, fontSize: 18, color: 'blue' }}>
+                  <Text style={{ textAlign: 'center', fontFamily: getFontFamilyFromName(fontFamily), fontSize: 18, color: 'blue' }}>
                     Go Premium
                   </Text>
                 </TouchableOpacity>
@@ -374,7 +372,7 @@ class Settings extends Component {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
             >
-              <Text style={{ fontFamily, fontSize,}}>
+              <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize,}}>
                 Cloud Sync
               </Text>
               <View style={{ justifyContent: 'center',}}>
