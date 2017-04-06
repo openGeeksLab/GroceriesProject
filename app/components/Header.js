@@ -83,4 +83,4 @@ mapStatetoProps = (state) => {
   }
 }
 
-export default connect(mapStatetoProps)(Header);
+export default Header;

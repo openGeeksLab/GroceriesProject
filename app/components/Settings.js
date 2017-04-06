@@ -15,7 +15,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
-import { changeFontFamily, /* setFontSize, */ clearSettings, incrementFont, decrementFont } from '../actions/settings-actions';
+import { changeFontFamily, /* setFontSize, */ clearSettings, setFontSize } from '../actions/settings-actions';
 // import {
 //   HelveticaNeue,
 //   Georgia,
@@ -56,13 +56,10 @@ class Settings extends Component {
   state = {
     selectedTheme: 'Popcorn White',
     openTheme: false,
-    // selectedFont: this.props.fontFamily && this.props.fontFamily,
     openFont: false,
     fontSize: this.props.fontSize,
     alphabeticalSort: false,
     cloudSync: false,
-    masFonts: listFonts,
-    masTheme: listTheme,
   }
 
   openListTheme = () => {
@@ -78,17 +75,33 @@ class Settings extends Component {
   }
 
   onDonePress = () => {
-    AsyncStorage.setItem('fontSize', JSON.stringify(this.props.fontSize));
-    AsyncStorage.setItem('fontFamily', JSON.stringify(this.props.fontFamily));
+    this.props.dispatch(setFontSize(this.state.fontSize));
+    AsyncStorage.setItem('fontSize', JSON.stringify(this.state));
+    // AsyncStorage.setItem('fontSize', JSON.stringify(this.props.fontSize));
+    // AsyncStorage.setItem('fontFamily', JSON.stringify(this.props.fontFamily));
   }
 
   onCancelPress = () => {
     this.props.dispatch(clearSettings())
   }
 
+  incrementFont = () => {
+    this.setState({
+      fontSize: this.state.fontSize + 1,
+    });
+  }
+
+  decrementFont = () => {
+    this.setState({
+      fontSize: this.state.fontSize - 1,
+    })
+  }
+
   renderListTheme = (item, index) => {
     // const fontFamily = this.context.uiTheme.fontFamily.fontFamily;
-    const { fontFamily, fontSize } = this.props;
+    const { fontFamily } = this.props;
+    const { fontSize } = this.state;
+
     return (
       <View
         key={index}
@@ -127,7 +140,8 @@ class Settings extends Component {
   }
 
   renderListFonts = (item, index) => {
-    const { fontFamily, fontSize } = this.props;
+    const { fontFamily } = this.props;
+    const { fontSize } = this.state;
     return (
       <View
         key={index}
@@ -168,12 +182,12 @@ class Settings extends Component {
   }
 
   selectFont = (index) => {
-    var selectFontMas = this.state.masFonts;
+    var selectFontMas = listFonts;
     this.props.dispatch(changeFontFamily(selectFontMas[index].name));
   }
 
   selectTheme = (index) => {
-    var selectThemeMas = this.state.masTheme;
+    var selectThemeMas = listTheme;
     for (let i=0;i<selectThemeMas.length;i++){
       if (selectThemeMas[i].selected === true) {
         selectThemeMas[i].selected = false;
@@ -181,14 +195,15 @@ class Settings extends Component {
     }
     selectThemeMas[index].selected = true;
     this.setState({
-      masTheme: selectThemeMas,
       openTheme: false,
       selectedTheme: selectThemeMas[index].name,
     });
   }
 
   render() {
-    const { fontFamily, fontSize } = this.props;
+    const { fontFamily } = this.props;
+    const { fontSize } = this.state;
+    console.warn(fontSize);
     // AsyncStorage.getAllKeys((err,keys) => {
     //   AsyncStorage.multiGet(keys, (err, stores) => {
     //     stores.map((store, i) => {
@@ -200,7 +215,7 @@ class Settings extends Component {
     // })
     return (
       <View style={styles.container}>
-        <Header leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} />
+        <Header leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
         <ScrollView>
           <View>
             <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
@@ -223,7 +238,7 @@ class Settings extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.openTheme && this.state.masTheme.map((item, index) => {return(this.renderListTheme(item, index))})}
+            {this.state.openTheme && listTheme.map((item, index) => {return(this.renderListTheme(item, index))})}
           </View>
 
           <View>
@@ -249,7 +264,7 @@ class Settings extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            {this.state.openFont && this.state.masFonts.map((item, index) => {return(this.renderListFonts(item, index))})}
+            {this.state.openFont && listFonts.map((item, index) => {return(this.renderListFonts(item, index))})}
           </View>
 
           <View style={{ width, }}>
@@ -264,7 +279,7 @@ class Settings extends Component {
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity
                       disabled={fontSize < 16}
-                      onPress={() => {this.props.dispatch(decrementFont())}}
+                      onPress={() => {this.decrementFont()}}
                       style={{
                         borderWidth: 1,
                         paddingVertical: 5,
@@ -287,7 +302,7 @@ class Settings extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       disabled={fontSize > 22}
-                      onPress={() => {this.props.dispatch(incrementFont())}}
+                      onPress={() => {this.incrementFont()}}
                       style={{
                         borderWidth: 1,
                         marginLeft: -1,

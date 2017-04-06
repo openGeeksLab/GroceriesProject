@@ -12,7 +12,7 @@ import Settings from './Settings';
 
 class NavigatorClass extends Component {
   componentWillMount() {
-    this.props.dispatch(getFontFamily());
+    // this.props.dispatch(getFontFamily());
     this.props.dispatch(getFontSize());
   }
 

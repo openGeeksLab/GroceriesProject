@@ -6,6 +6,7 @@ export const actionTypes = {
   INCREMENT_FONT: 'INCREMENT_FONT',
   DECREMENT_FONT: 'DECREMENT_FONT',
   GET_FONT_SIZE: 'GET_FONT_SIZE',
+  SET_FONT_SIZE: 'SET_FONT_SIZE',
   CLEAR_SETTINGS_INITIAL: 'CLEAR_SETTINGS_INITIAL',
 };
 
@@ -33,6 +34,7 @@ export const getFontSize = () =>
   (dispatch) => {
     AsyncStorage.getItem('fontSize').then(fontSize => {
       if (fontSize) {
+        console.warn(fontSize);
         dispatch({
           type: actionTypes.GET_FONT_SIZE,
           fontSize: JSON.parse(fontSize),
@@ -41,17 +43,24 @@ export const getFontSize = () =>
     });
   }
 
-export const incrementFont = () => {
+export const setFontSize = (fontSize) => {
   return {
-    type: actionTypes.INCREMENT_FONT,
+    type: actionTypes.SET_FONT_SIZE,
+    fontSize,
   }
 }
 
-export const decrementFont = () => {
-  return {
-    type: actionTypes.DECREMENT_FONT,
-  }
-}
+// export const incrementFont = () => {
+//   return {
+//     type: actionTypes.INCREMENT_FONT,
+//   }
+// }
+//
+// export const decrementFont = () => {
+//   return {
+//     type: actionTypes.DECREMENT_FONT,
+//   }
+// }
 
 export const clearSettings = () => {
   AsyncStorage.getAllKeys((err,keys) => {

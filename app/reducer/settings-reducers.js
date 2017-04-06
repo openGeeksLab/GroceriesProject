@@ -23,16 +23,21 @@ export default function AppReducers(state = initialState, action) {
         ...state,
         fontSize: action.fontSize
       }
-    case actionTypes.INCREMENT_FONT:
+    case actionTypes.SET_FONT_SIZE:
       return {
         ...state,
-        fontSize: state.fontSize + 1
+        fontSize: action.fontSize,
       }
-    case actionTypes.DECREMENT_FONT:
-      return {
-        ...state,
-        fontSize: state.fontSize - 1
-      }
+    // case actionTypes.INCREMENT_FONT:
+    //   return {
+    //     ...state,
+    //     fontSize: state.fontSize + 1
+    //   }
+    // case actionTypes.DECREMENT_FONT:
+    //   return {
+    //     ...state,
+    //     fontSize: state.fontSize - 1
+    //   }
     case actionTypes.CLEAR_SETTINGS_INITIAL:
       return {
         ...initialState,
