@@ -2,6 +2,7 @@ import { actionTypes } from '../actions/settings-actions';
 import { AsyncStorage } from 'react-native';
 
 const initialState = {
+  theme: 'Popcorn White',
   fontFamily: 'AmericanTypewriter',
   fontSize: 18,
 };
@@ -28,23 +29,19 @@ export default function AppReducers(state = initialState, action) {
         ...state,
         fontSize: action.fontSize,
       }
-    // case actionTypes.INCREMENT_FONT:
-    //   return {
-    //     ...state,
-    //     fontSize: state.fontSize + 1
-    //   }
-    // case actionTypes.DECREMENT_FONT:
-    //   return {
-    //     ...state,
-    //     fontSize: state.fontSize - 1
-    //   }
-    case actionTypes.CLEAR_SETTINGS_INITIAL:
+    case actionTypes.SET_THEME:
       return {
-        ...initialState,
+        ...state,
+        theme: action.theme,
       }
-    // case actionTypes.CLEAR_SETTINGS:
+    case actionTypes.GET_THEME:
+      return {
+        ...state,
+        theme: action.theme
+      }
+    // case actionTypes.CLEAR_SETTINGS_INITIAL:
     //   return {
-    //     fontSize: action.fontSize,
+    //     ...initialState,
     //   }
     default:
       return state;

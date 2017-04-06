@@ -6,7 +6,7 @@ import {
   Navigator,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { getFontFamily, getFontSize } from '../actions/settings-actions';
+import { getFontFamily, getFontSize, getTheme } from '../actions/settings-actions';
 import Main from './Main';
 import Settings from './Settings';
 
@@ -14,6 +14,7 @@ class NavigatorClass extends Component {
   componentWillMount() {
     this.props.dispatch(getFontFamily());
     this.props.dispatch(getFontSize());
+    this.props.dispatch(getTheme());
   }
 
   render() {
