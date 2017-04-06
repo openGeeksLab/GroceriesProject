@@ -37,10 +37,10 @@ export default function AppReducers(state = initialState, action) {
       return {
         ...initialState,
       }
-    case actionTypes.CLEAR_SETTINGS:
-      return {
-        fontSize: action.fontSize,
-      }
+    // case actionTypes.CLEAR_SETTINGS:
+    //   return {
+    //     fontSize: action.fontSize,
+    //   }
     default:
       return state;
   }

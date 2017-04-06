@@ -49,9 +49,6 @@ const listFonts = [
 ];
 
 class Settings extends Component {
-  componentWillMount() {
-    AsyncStorage.setItem('LOL', 'LOL')
-  }
   static contextTypes = {
     uiTheme: PropTypes.object.isRequired,
   }

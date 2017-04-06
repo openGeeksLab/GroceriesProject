@@ -2,15 +2,14 @@ import { AsyncStorage } from 'react-native';
 
 export const actionTypes = {
   CHANGE_FONT_FAMILY: 'CHANGE_FONT_FAMILY',
-  SET_FONT_FAMILY: 'SET_FONT_FAMILY',
+  GET_FONT_FAMILY: 'GET_FONT_FAMILY',
   INCREMENT_FONT: 'INCREMENT_FONT',
   DECREMENT_FONT: 'DECREMENT_FONT',
   GET_FONT_SIZE: 'GET_FONT_SIZE',
-  CLEAR_SETTINGS: 'CLEAR_SETTINGS',
   CLEAR_SETTINGS_INITIAL: 'CLEAR_SETTINGS_INITIAL',
 };
 
-export const setFontFamily = () =>
+export const getFontFamily = () =>
   (dispatch) => {
     AsyncStorage.getItem('fontFamily').then(fontFamily => {
       if (fontFamily) {
@@ -24,7 +23,6 @@ export const setFontFamily = () =>
 
 export const changeFontFamily = (fontFamily) =>
   (dispatch) => {
-    // AsyncStorage.setItem('fontFamily', JSON.stringify(fontFamily));
     dispatch({
       type: actionTypes.CHANGE_FONT_FAMILY,
       fontFamily,
@@ -43,26 +41,25 @@ export const getFontSize = () =>
     });
   }
 
-export const incrementFont = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.INCREMENT_FONT,
-    })
+export const incrementFont = () => {
+  return {
+    type: actionTypes.INCREMENT_FONT,
   }
+}
 
-export const decrementFont = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.DECREMENT_FONT,
-    })
+export const decrementFont = () => {
+  return {
+    type: actionTypes.DECREMENT_FONT,
   }
+}
 
 export const clearSettings = () => {
   AsyncStorage.getAllKeys((err,keys) => {
     AsyncStorage.multiGet(keys, (err, stores) => {
       stores.map((store, i) => {
         if (store[0] === 'fontSize' || store[0] === 'fontFamily') {
-
+          getFontSize();
+          getFontFamily();
         } else {
           return {
             type: actionTypes.CLEAR_SETTINGS_INITIAL,
@@ -71,16 +68,4 @@ export const clearSettings = () => {
       });
     });
   });
-  // AsyncStorage.getItem('fontSize').then(fontSize => {
-  //   if (fontSize) {
-  //     return {
-  //       type: actionTypes.CLEAR_SETTINGS,
-  //       fontSize: fontSize,
-  //     }
-  //   } else {
-  //     return {
-  //       type: actionTypes.CLEAR_SETTINGS_INITIAL,
-  //     }
-  //   }
-  // })
 }
