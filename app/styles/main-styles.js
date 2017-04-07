@@ -28,6 +28,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  viewListItem: {
+    width,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  touchableOpacityListItemFlexDirection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewImageFlex5: {
+    justifyContent: 'center',
+    flex: 0.05,
+  },
+  viewListItemNameFlex95: {
+    flex: 0.95,
+    paddingRight: 10,
+  },
+  imageArrow: {
+    width: 12,
+    height: 20,
+  },
 });
 
 export default styles;

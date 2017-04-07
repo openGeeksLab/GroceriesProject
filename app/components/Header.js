@@ -54,7 +54,6 @@ class Header extends Component {
 
   render() {
     const { leftIcon, leftText, rightIcon, rightText, title, fontFamily, fontSize, color } = this.props;
-    console.warn(fontFamily);
     return (
       <View style={styles.header}>
         <View style={{ marginHorizontal: 15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', /* marginTop: 15, paddingBottom: 15 */ }}>

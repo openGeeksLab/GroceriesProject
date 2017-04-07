@@ -109,7 +109,7 @@ class Settings extends Component {
 
   onDonePress = () => {
     this.props.dispatch(setFontSize(this.state.fontSize));
-    this.props.dispatch(setFontFamily(this.state.fontFamily));
+    this.props.dispatch(setFontFamily(this.state.fontFamilyName));
     this.props.dispatch(setTheme(this.state.theme));
     AsyncStorage.setItem('state', JSON.stringify(this.state));
     this.props.navigator.pop();
@@ -310,15 +310,15 @@ class Settings extends Component {
                 <View style={styles.viewButtonsChangeFontSize}>
                   <View style={styles.viewButtonsChangeFontSizeFlexDirection}>
                     <TouchableOpacity
-                      disabled={fontSize < 13}
+                      disabled={fontSize < 14}
                       onPress={() => {this.decrementFont()}}
                       style={[styles.touchableOpacityChangeFontSizeMinus, {
-                        borderColor: fontSize < 13 ? 'grey' : colorButtons,
+                        borderColor: fontSize < 14 ? 'grey' : colorButtons,
                       }]}
                     >
                       <Text
                         style={[styles.textChangeFontSizeButton, {
-                          color: fontSize < 13 ? 'grey' : colorButtons,
+                          color: fontSize < 14 ? 'grey' : colorButtons,
                         }]}
                       >
                         -

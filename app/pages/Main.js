@@ -9,9 +9,10 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 
-import { SETTINGS_ICON, EDIT_ICON, CART_INACTIVE_ICON, LIST_INACTIVE_ICON  } from 'AppIcons';
+import { SETTINGS_ICON, EDIT_ICON, CART_INACTIVE_ICON, ARROW_ICON, LIST_INACTIVE_ICON  } from 'AppIcons';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styles from '../styles/main-styles';
@@ -34,11 +35,22 @@ export default class Main extends Component {
   }
 
   renderItemList = (item, index) => {
+    const { fontSize, fontFamilyName, theme, list } = this.props;
+    const backgroundColor = getColor(theme).backgroundColor;
+    const color = getColor(theme).color;
+    const fontFamily = getFontFamilyFromName(fontFamilyName);
     return (
-      <View key={item.id} style={styles.viewListItem}>
-        <Text>
-          {item.name}
-        </Text>
+      <View key={item.id} style={[styles.viewListItem, { backgroundColor }]}>
+        <TouchableOpacity style={styles.touchableOpacityListItemFlexDirection}>
+          <View style={styles.viewListItemNameFlex95}>
+            <Text style={{fontSize, fontFamily, color}}>
+              {item.name}
+            </Text>
+          </View>
+          <View style={styles.viewImageFlex5}>
+            <Image style={styles.imageArrow} resizeMode={'contain'} source={ARROW_ICON} />
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
