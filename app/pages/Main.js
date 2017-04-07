@@ -8,6 +8,7 @@ import {
   Modal,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 
 import { SETTINGS_ICON, EDIT_ICON, CART_INACTIVE_ICON, LIST_INACTIVE_ICON  } from 'AppIcons';
@@ -32,11 +33,24 @@ export default class Main extends Component {
     uiTheme: PropTypes.object.isRequired,
   }
 
+  renderItemList = (item, index) => {
+    return (
+      <View key={item.id} style={styles.viewListItem}>
+        <Text>
+          {item.name}
+        </Text>
+      </View>
+    );
+  }
+
   render() {
     const main = this.context.uiTheme && this.context.uiTheme.main;
-    const { fontSize, fontFamily, theme } = this.props;
+    const { fontSize, fontFamilyName, theme, list } = this.props;
+    const backgroundColor = getColor(theme).backgroundColor;
+    const color = getColor(theme).color;
+    const fontFamily = getFontFamilyFromName(fontFamilyName);
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor } ]}>
         <Header
           color={getColor(theme).colorHeaderAndFooter}
           tintColor={getColor(theme).colorHeaderAndFooter}
@@ -46,9 +60,20 @@ export default class Main extends Component {
           rightIcon={EDIT_ICON}
           title={'Lists'}
           fontSize={fontSize}
-          fontFamily={fontFamily}
+          fontFamily={fontFamilyName}
         />
         <ScrollView>
+          {
+            list
+            ?
+              list.map((item, index) => {
+                return(this.renderItemList(item, index))
+              })
+            :
+              <View style={styles.viewActivityIndicator}>
+                <ActivityIndicator />
+              </View>
+          }
         </ScrollView>
         <Footer
           tintColor={getColor(theme).colorHeaderAndFooter}
@@ -63,8 +88,9 @@ export default class Main extends Component {
 var mapStatetoProps = (state) => {
   return {
     fontSize: state.settings.fontSize,
-    fontFamily: state.settings.fontFamily,
+    fontFamilyName: state.settings.fontFamily,
     theme: state.settings.theme,
+    list: state.main.list,
   }
 }
 

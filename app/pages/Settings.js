@@ -66,7 +66,7 @@ class Settings extends Component {
     openTheme: false,
     openFont: false,
     fontSize: this.props.fontSize,
-    fontFamily: this.props.fontFamily,
+    fontFamilyName: this.props.fontFamily,
     alphabeticalSort: false,
     cloudSync: false,
     spinValueFont: new Animated.Value(0),
@@ -132,13 +132,15 @@ class Settings extends Component {
   }
 
   renderListTheme = (item, index) => {
-    const { fontSize, fontFamily, theme } = this.state;
-
+    const { fontSize, fontFamilyName, theme } = this.state;
+    const fontFamily = getFontFamilyFromName(fontFamilyName);
+    const color = getColor(item.name).color;
+    const backgroundColor = getColor(item.name).backgroundColor;
     return (
       <View
         key={index}
         style={[styles.viewListTheme, {
-          backgroundColor: getColor(item.name).backgroundColor,
+          backgroundColor,
         }]}
       >
         <TouchableOpacity
@@ -149,7 +151,7 @@ class Settings extends Component {
         >
           <View style={styles.viewTextNameTheme}>
             <Text
-              style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(item.name).color }}
+              style={{ fontFamily, fontSize, color }}
             >
               {item.name}
             </Text>
@@ -167,12 +169,15 @@ class Settings extends Component {
   }
 
   renderListFonts = (item, index) => {
-    const { fontSize, fontFamily, theme} = this.state;
+    const { fontSize, fontFamilyName, theme} = this.state;
+    const fontFamily = getFontFamilyFromName(item.name);
+    const color = getColor(item.name).color;
+    const backgroundColor = getColor(item.name).backgroundColor;
     return (
       <View
         key={index}
         style={[styles.viewListFont, {
-          backgroundColor: getColor(theme).backgroundColor,
+          backgroundColor,
         }]}
       >
         <TouchableOpacity
@@ -183,7 +188,7 @@ class Settings extends Component {
         >
           <View style={styles.viewTextNameFont}>
             <Text
-              style={{fontFamily: getFontFamilyFromName(item.name), fontSize, color: getColor(theme).color }}
+              style={{fontFamily, fontSize, color}}
             >
               {item.name}
             </Text>
@@ -203,7 +208,7 @@ class Settings extends Component {
   selectFont = (index) => {
     var selectFontMas = listFonts;
     this.setState({
-      fontFamily: selectFontMas[index].name,
+      fontFamilyName: selectFontMas[index].name,
     })
   }
 
@@ -214,7 +219,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { fontSize, fontFamily, theme } = this.state;
+    const { fontSize, fontFamilyName, theme } = this.state;
     const spinTheme = this.state.spinValueTheme.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '90deg']
@@ -223,6 +228,10 @@ class Settings extends Component {
       inputRange: [0, 1],
       outputRange: ['0deg', '90deg']
     });
+    const fontFamily = getFontFamilyFromName(fontFamilyName);
+    const color = getColor(theme).color;
+    const backgroundColor = getColor(theme).backgroundColor;
+    const colorButtons = getColor(theme).colorButtons;
     return (
       <View style={[styles.container, { backgroundColor: getColor(theme).backgroundColor }]}>
         <Header
@@ -233,23 +242,23 @@ class Settings extends Component {
           rightText={'Done'}
           title={'Settings'}
           fontSize={fontSize}
-          fontFamily={fontFamily}
+          fontFamily={fontFamilyName}
         />
         <ScrollView>
-          <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
+          <View style={{ backgroundColor }}>
             <View style={styles.viewThemeLine}>
               <TouchableOpacity
                 onPress={() => {this.openListTheme()}}
                 style={styles.touchableOpacityTheme}
               >
                 <View style={styles.viewTextThemeFlex35}>
-                  <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
+                  <Text style={{ fontFamily, fontSize, color }}>
                     Theme
                   </Text>
                 </View>
                 <View style={styles.viewTextChoosedNameTheme}>
                   <View style={styles.viewTextChoosedNameThemeFlexDirection}>
-                    <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), color: getColor(theme).color }}>
+                    <Text style={{ fontSize, fontFamily, color }}>
                       {this.state.theme}
                     </Text>
                     <Animated.View style={[styles.animatedViewArrow, {  transform: [{rotate: spinTheme}], }]}>
@@ -262,23 +271,23 @@ class Settings extends Component {
             {this.state.openTheme && listTheme.map((item, index) => {return(this.renderListTheme(item, index))})}
           </View>
 
-          <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
+          <View style={{ backgroundColor }}>
             <View style={styles.viewFontLine}>
               <TouchableOpacity
                 onPress={() => {this.openListFont()}}
                 style={styles.touchableOpacityFont}
               >
                 <View style={styles.viewTextFontFlex25}>
-                  <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
+                  <Text style={{ fontFamily, fontSize, color }}>
                     Font
                   </Text>
                 </View>
                 <View style={styles.viewTextChoosedNameFont}>
                   <View style={styles.viewTextChoosedNameFontFlexDirection}>
                     <Text
-                      style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}
+                      style={{ fontFamily, fontSize, color }}
                     >
-                      {this.state.fontFamily}
+                      {this.state.fontFamilyName}
                     </Text>
                     <Animated.View style={[styles.animatedViewArrow, {transform: [{rotate: spinFont}] }]}>
                       <Animated.Image style={styles.imageArrow} source={ARROW_ICON}/>
@@ -290,12 +299,12 @@ class Settings extends Component {
             {this.state.openFont && listFonts.map((item, index) => {return(this.renderListFonts(item, index))})}
           </View>
 
-          <View style={{ width, backgroundColor: getColor(theme).backgroundColor, }}>
+          <View style={{ width, backgroundColor }}>
             <View style={styles.viewFontSizeLine}>
               <View
                 style={styles.viewFontSizeFlexDirection}
               >
-                <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
+                <Text style={{ fontFamily, fontSize, color }}>
                   Font Size
                 </Text>
                 <View style={styles.viewButtonsChangeFontSize}>
@@ -304,12 +313,12 @@ class Settings extends Component {
                       disabled={fontSize < 13}
                       onPress={() => {this.decrementFont()}}
                       style={[styles.touchableOpacityChangeFontSizeMinus, {
-                        borderColor: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
+                        borderColor: fontSize < 13 ? 'grey' : colorButtons,
                       }]}
                     >
                       <Text
                         style={[styles.textChangeFontSizeButton, {
-                          color: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
+                          color: fontSize < 13 ? 'grey' : colorButtons,
                         }]}
                       >
                         -
@@ -319,12 +328,12 @@ class Settings extends Component {
                       disabled={fontSize > 20}
                       onPress={() => {this.incrementFont()}}
                       style={[styles.touchableOpacityChangeFontSizePlus, {
-                        borderColor: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
+                        borderColor: fontSize > 20 ? 'grey' : colorButtons,
                       }]}
                     >
                       <Text
                         style={[styles.textChangeFontSizeButton, {
-                          color: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
+                          color: fontSize > 20 ? 'grey' : colorButtons,
                         }]}>
                         +
                       </Text>
@@ -334,11 +343,11 @@ class Settings extends Component {
               </View>
             </View>
           </View>
-          <View style={[styles.viewAlphabeticalSort, {backgroundColor: getColor(theme).backgroundColor}]}>
+          <View style={[styles.viewAlphabeticalSort, {backgroundColor}]}>
             <View
               style={styles.viewAlphabeticalSortFlexDirection}
             >
-              <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
+              <Text style={{ fontFamily, fontSize, color }}>
                 Alphabetical Sort
               </Text>
               <View style={styles.viewSwitch}>
@@ -351,23 +360,23 @@ class Settings extends Component {
           </View>
 
 
-          <View style={[styles.viewPremiumFeatures, {backgroundColor: getColor(theme).backgroundColor}]}>
-            <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
+          <View style={[styles.viewPremiumFeatures, {backgroundColor}]}>
+            <Text style={{ fontFamily, fontSize, color }}>
               Premium Features
             </Text>
           </View>
-          <View style={[styles.viewUnlockExtraFeatures, { backgroundColor: getColor(theme).backgroundColor }]}>
+          <View style={[styles.viewUnlockExtraFeatures, { backgroundColor }]}>
             <View
               style={styles.viewUnlockExtraFeaturesFlexDirection}
             >
               <View style={styles.viewUnlockExtraFeaturesFlex55}>
-                <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color}}>
+                <Text style={{ fontFamily, fontSize, color}}>
                   Unlock extra features
                 </Text>
               </View>
               <View style={styles.viewGoPremiumButtonFlex45}>
-                <TouchableOpacity style={[styles.touchableOpacityGoPremium, { borderColor: getColor(theme).colorButtons, }]}>
-                  <Text style={[styles.textButtonGoPremium, { fontFamily: getFontFamilyFromName(fontFamily), color: getColor(theme).colorButtons }]}>
+                <TouchableOpacity style={[styles.touchableOpacityGoPremium, { borderColor: colorButtons, }]}>
+                  <Text style={[styles.textButtonGoPremium, { fontFamily, color: colorButtons }]}>
                     Go Premium
                   </Text>
                 </TouchableOpacity>
@@ -375,11 +384,11 @@ class Settings extends Component {
             </View>
           </View>
 
-          <View style={[styles.viewCloudSync, {  backgroundColor: getColor(theme).backgroundColor,  }]}>
+          <View style={[styles.viewCloudSync, {  backgroundColor  }]}>
             <View
               style={styles.viewCloudSyncFlexDirection}
             >
-              <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color}}>
+              <Text style={{ fontFamily, fontSize, color}}>
                 Cloud Sync
               </Text>
               <View style={styles.viewSwitch}>

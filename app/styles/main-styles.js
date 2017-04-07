@@ -15,6 +15,19 @@ const styles = StyleSheet.create({
       android:{}
     }),
   },
+  viewActivityIndicator: {
+    width,
+    ...Platform.select({
+      ios:{
+        height: (height - 136),
+      },
+      android: {
+        height: (height - 110),
+      },
+    }),
+    flex: 1,
+    justifyContent: 'center',
+  },
 });
 
 export default styles;

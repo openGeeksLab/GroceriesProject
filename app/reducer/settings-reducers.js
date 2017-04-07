@@ -7,7 +7,7 @@ const initialState = {
   fontSize: 16,
 };
 
-export default function AppReducers(state = initialState, action) {
+export default function SettingsReducers(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_FONT_FAMILY:
       return {

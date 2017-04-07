@@ -30,10 +30,10 @@ export const getFontFamily = () =>
   (dispatch) => {
     AsyncStorage.getItem('state').then(state => {
       const parsedState = JSON.parse(state);
-      if (parsedState && parsedState.fontFamily) {
+      if (parsedState && parsedState.fontFamilyName) {
         dispatch({
           type: actionTypes.SET_FONT_FAMILY,
-          fontFamily: parsedState.fontFamily,
+          fontFamily: parsedState.fontFamilyName,
         })
       }
     })
