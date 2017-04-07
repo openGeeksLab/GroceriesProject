@@ -139,6 +139,47 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  viewFontSizeLine: {
+    height: 50,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  viewFontSizeFlexDirection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewButtonsChangeFontSize: {
+    justifyContent: 'center',
+  },
+  viewButtonsChangeFontSizeFlexDirection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  touchableOpacityChangeFontSizeMinus: {
+    borderWidth: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 25,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderTopRightRadius: 2,
+    borderBottomRightRadius: 2,
+  },
+  touchableOpacityChangeFontSizePlus: {
+    borderWidth: 1,
+    marginLeft: -1,
+    paddingVertical: 5,
+    paddingHorizontal: 23,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
+  },
+  textChangeFontSizeButton: {
+    fontSize: 20,
+  },
 });
 
 const listTheme = [
@@ -385,34 +426,26 @@ class Settings extends Component {
           </View>
 
           <View style={{ width, backgroundColor: getColor(theme).backgroundColor, }}>
-            <View style={{ height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View style={styles.viewFontSizeLine}>
               <View
-                style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+                style={styles.viewFontSizeFlexDirection}
               >
                 <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
                   Font Size
                 </Text>
-                <View style={{ justifyContent: 'center' }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.viewButtonsChangeFontSize}>
+                  <View style={styles.viewButtonsChangeFontSizeFlexDirection}>
                     <TouchableOpacity
                       disabled={fontSize < 13}
                       onPress={() => {this.decrementFont()}}
-                      style={{
-                        borderWidth: 1,
-                        paddingVertical: 5,
-                        paddingHorizontal: 25,
-                        borderTopLeftRadius: 10,
-                        borderBottomLeftRadius: 10,
-                        borderTopRightRadius: 2,
-                        borderBottomRightRadius: 2,
+                      style={[styles.touchableOpacityChangeFontSizeMinus, {
                         borderColor: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
-                      }}
+                      }]}
                     >
                       <Text
-                        style={{
-                          fontSize: 20,
+                        style={[styles.textChangeFontSizeButton, {
                           color: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
-                        }}
+                        }]}
                       >
                         -
                       </Text>
@@ -420,23 +453,14 @@ class Settings extends Component {
                     <TouchableOpacity
                       disabled={fontSize > 20}
                       onPress={() => {this.incrementFont()}}
-                      style={{
-                        borderWidth: 1,
-                        marginLeft: -1,
-                        paddingVertical: 5,
-                        paddingHorizontal: 23,
-                        borderTopRightRadius: 10,
-                        borderBottomRightRadius: 10,
-                        borderTopLeftRadius: 2,
-                        borderBottomLeftRadius: 2,
+                      style={[styles.touchableOpacityChangeFontSizePlus, {
                         borderColor: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
-                      }}
+                      }]}
                     >
                       <Text
-                        style={{
-                          fontSize: 20,
+                        style={[styles.textChangeFontSizeButton, {
                           color: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
-                        }}>
+                        }]}>
                         +
                       </Text>
                     </TouchableOpacity>
