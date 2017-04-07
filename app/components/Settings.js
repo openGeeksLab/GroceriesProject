@@ -79,6 +79,66 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
   },
+  viewThemeLine: {
+    width,
+    paddingLeft: 15,
+    paddingRight: 15,
+    height: 50,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  touchableOpacityTheme: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  viewTextThemeFlex35: {
+    flex: 0.35,
+  },
+  viewTextChoosedNameTheme: {
+    flex: 0.65,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  viewTextChoosedNameThemeFlexDirection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  animatedViewArrow: {
+    height: 20,
+    width: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageArrow: {
+    height: 20,
+    width: 12,
+  },
+  viewFontLine: {
+    width,
+    paddingHorizontal: 15,
+    height: 50,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  touchableOpacityFont: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewTextFontFlex25: {
+    flex: 0.25,
+  },
+  viewTextChoosedNameFont: {
+    flex: 0.75,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  viewTextChoosedNameFontFlexDirection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
 
 const listTheme = [
@@ -271,23 +331,23 @@ class Settings extends Component {
         <Header color={getColor(theme).colorHeaderAndFooter} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
         <ScrollView>
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
-            <View style={{ width, paddingLeft: 15, paddingRight: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View style={styles.viewThemeLine}>
               <TouchableOpacity
                 onPress={() => {this.openListTheme()}}
-                style={{ flexDirection: 'row', justifyContent: 'space-between', }}
+                style={styles.touchableOpacityTheme}
               >
-                <View style={{ flex: 0.35 }}>
+                <View style={styles.viewTextThemeFlex35}>
                   <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
                     Theme
                   </Text>
                 </View>
-                <View style={{ flex: 0.65, alignItems: 'flex-end', justifyContent: 'center' }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.viewTextChoosedNameTheme}>
+                  <View style={styles.viewTextChoosedNameThemeFlexDirection}>
                     <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), color: getColor(theme).color }}>
                       {this.state.theme}
                     </Text>
-                    <Animated.View style={{ height: 20, width: 20, justifyContent: 'center', alignItems: 'center', transform: [{rotate: spinTheme}], }}>
-                      <Animated.Image style={{ height: 20, width: 12, }} source={ARROW_ICON}/>
+                    <Animated.View style={[styles.animatedViewArrow, {  transform: [{rotate: spinTheme}], }]}>
+                      <Animated.Image style={styles.imageArrow} source={ARROW_ICON}/>
                     </Animated.View>
                   </View>
                 </View>
@@ -297,25 +357,25 @@ class Settings extends Component {
           </View>
 
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
-            <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View style={styles.viewFontLine}>
               <TouchableOpacity
                 onPress={() => {this.openListFont()}}
-                style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+                style={styles.touchableOpacityFont}
               >
-                <View style={{ flex: 0.25 }}>
+                <View style={styles.viewTextFontFlex25}>
                   <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
                     Font
                   </Text>
                 </View>
-                <View style={{ flex: 0.75, alignItems: 'flex-end', justifyContent: 'center' }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.viewTextChoosedNameFont}>
+                  <View style={styles.viewTextChoosedNameFontFlexDirection}>
                     <Text
                       style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}
                     >
                       {this.state.fontFamily}
                     </Text>
-                    <Animated.View style={{ height: 20, width: 20, transform: [{rotate: spinFont}], justifyContent: 'center', alignItems: 'center' }}>
-                      <Animated.Image style={{ height: 20, width: 12, }} source={ARROW_ICON}/>
+                    <Animated.View style={[styles.animatedViewArrow, {transform: [{rotate: spinFont}] }]}>
+                      <Animated.Image style={styles.imageArrow} source={ARROW_ICON}/>
                     </Animated.View>
                   </View>
                 </View>
