@@ -47,6 +47,38 @@ const styles = StyleSheet.create({
     }),
     width,
   },
+  viewListTheme: {
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  touchableOpacityListTheme: {
+    width,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 15,
+  },
+  viewTextNameTheme: {
+    height: 40,
+    justifyContent: 'center',
+  },
+  viewImageList: {
+    justifyContent: 'center'
+  },
+  viewListFont: {
+    width,
+    borderColor: '#c8c7cc',
+    borderBottomWidth: 1,
+  },
+  touchableOpacityListFont: {
+    width,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 15,
+  },
+  viewTextNameFont: {
+    height: 40,
+    justifyContent: 'center',
+  },
 });
 
 const listTheme = [
@@ -148,23 +180,17 @@ class Settings extends Component {
     return (
       <View
         key={index}
-        style={{
-          borderBottomWidth: 1,
-          borderColor: '#c8c7cc',
+        style={[styles.viewListTheme, {
           backgroundColor: getColor(item.name).backgroundColor,
-        }}
+        }]}
       >
         <TouchableOpacity
           onPress={() => {this.selectTheme(index)}}
-          style={{
-            width,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+          style={[styles.touchableOpacityListTheme, {
             paddingLeft: item.name === this.state.theme ? 10 : 15,
-            paddingRight: 15,
-          }}
+          }]}
         >
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={styles.viewTextNameTheme}>
             <Text
               style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(item.name).color }}
             >
@@ -174,7 +200,7 @@ class Settings extends Component {
           {
             item.name === this.state.theme
             &&
-            <View style={{ justifyContent: 'center'}}>
+            <View style={styles.viewImageList}>
               <Image source={SELECTED_ICON}/>
             </View>
           }
@@ -188,24 +214,17 @@ class Settings extends Component {
     return (
       <View
         key={index}
-        style={{
-          width,
-          borderColor: '#c8c7cc',
-          borderBottomWidth: 1,
+        style={[styles.viewListFont, {
           backgroundColor: getColor(theme).backgroundColor,
-        }}
+        }]}
       >
         <TouchableOpacity
-          style={{
-            width,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+          style={[styles.touchableOpacityListFont, {
             paddingLeft: item.name === this.state.fontFamily ? 8 : 15,
-            paddingRight: 15,
-          }}
+          }]}
           onPress={() => {this.selectFont(index)}}
         >
-          <View style={{ height: 40, justifyContent: 'center' }}>
+          <View style={styles.viewTextNameFont}>
             <Text
               style={{fontFamily: getFontFamilyFromName(item.name), fontSize, color: getColor(theme).color }}
             >
@@ -215,7 +234,7 @@ class Settings extends Component {
           {
             item.name === this.state.fontFamily
             &&
-            <View style={{ justifyContent: 'center'}}>
+            <View style={styles.viewImageList}>
               <Image source={SELECTED_ICON}/>
             </View>
           }
