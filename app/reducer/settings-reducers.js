@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 const initialState = {
   theme: 'Popcorn White',
   fontFamily: 'AmericanTypewriter',
-  fontSize: 18,
+  fontSize: 16,
 };
 
 export default function AppReducers(state = initialState, action) {

@@ -36,7 +36,7 @@ const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     ...Platform.select({
       ios:{
         marginTop: 26,
@@ -216,7 +216,6 @@ class Settings extends Component {
     const { fontSize, fontFamily, theme } = this.state;
     return (
       <View style={[styles.container, { backgroundColor: getColor(theme).backgroundColor }]}>
-        {Platform.OS === 'ios' && <StatusBar /> }
         <Header color={getColor(theme).colorHeaderAndFooter} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
         <ScrollView>
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
@@ -280,7 +279,7 @@ class Settings extends Component {
                 <View style={{ justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity
-                      disabled={fontSize < 16}
+                      disabled={fontSize < 13}
                       onPress={() => {this.decrementFont()}}
                       style={{
                         borderWidth: 1,
@@ -290,20 +289,20 @@ class Settings extends Component {
                         borderBottomLeftRadius: 10,
                         borderTopRightRadius: 2,
                         borderBottomRightRadius: 2,
-                        borderColor: fontSize < 16 ? 'grey' : getColor(theme).colorButtons,
+                        borderColor: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 20,
-                          color: fontSize < 16 ? 'grey' : getColor(theme).colorButtons,
+                          color: fontSize < 13 ? 'grey' : getColor(theme).colorButtons,
                         }}
                       >
                         -
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      disabled={fontSize > 22}
+                      disabled={fontSize > 20}
                       onPress={() => {this.incrementFont()}}
                       style={{
                         borderWidth: 1,
@@ -314,13 +313,13 @@ class Settings extends Component {
                         borderBottomRightRadius: 10,
                         borderTopLeftRadius: 2,
                         borderBottomLeftRadius: 2,
-                        borderColor: fontSize > 22 ? 'grey' : getColor(theme).colorButtons,
+                        borderColor: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
                       }}
                     >
                       <Text
                         style={{
                           fontSize: 20,
-                          color: fontSize > 22 ? 'grey' : getColor(theme).colorButtons,
+                          color: fontSize > 20 ? 'grey' : getColor(theme).colorButtons,
                         }}>
                         +
                       </Text>
