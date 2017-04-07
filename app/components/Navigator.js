@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getFontFamily, getFontSize, getTheme } from '../actions/settings-actions';
-import Main from './Main';
-import Settings from './Settings';
+import Main from '../pages/Main';
+import Settings from '../pages/Settings';
 
 class NavigatorClass extends Component {
   componentWillMount() {
@@ -20,7 +20,7 @@ class NavigatorClass extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'Settings'}}
+        initialRoute={{ title: 'Main'}}
         renderScene={(route, navigator) => {
           switch (route.title) {
             case 'Main': return (<Main route={route} navigator={navigator} />);
@@ -31,6 +31,7 @@ class NavigatorClass extends Component {
         }}
         configureScene={(route, routeStack) =>{
           switch (route.title) {
+            case 'Main': return Navigator.SceneConfigs.FloatFromRight;
             case 'Settings': return Navigator.SceneConfigs.FloatFromLeft;
             default: return Navigator.SceneConfigs.FloatFromRight;
           }

@@ -14,8 +14,8 @@ import {
   Animated,
 } from 'react-native';
 import { TUTORIAL_ICON, LIFEBUOY_ICON, STAR_ICON, ARROW_ICON, SELECTED_ICON } from 'AppIcons';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 // import uiTheme from 'AppTheme';
 import { connect } from 'react-redux';
 import { setFontFamily, setFontSize, setTheme } from '../actions/settings-actions';
@@ -111,11 +111,12 @@ class Settings extends Component {
     this.props.dispatch(setFontSize(this.state.fontSize));
     this.props.dispatch(setFontFamily(this.state.fontFamily));
     this.props.dispatch(setTheme(this.state.theme));
-    AsyncStorage.setItem('state', JSON.stringify(this.state));;
+    AsyncStorage.setItem('state', JSON.stringify(this.state));
+    this.props.navigator.pop();
   }
 
   onCancelPress = () => {
-    // this.props.dispatch(clearSettings())
+    this.props.navigator.pop();
   }
 
   incrementFont = () => {
