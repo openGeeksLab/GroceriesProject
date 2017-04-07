@@ -49,14 +49,22 @@ const styles = StyleSheet.create({
     flex: 0.95,
     paddingRight: 10,
   },
-  viewListItemNameFlex85: {
-    flex: 0.85,
+  viewListItemNameFlex80: {
+    flex: 0.8,
     paddingLeft: 5,
     paddingRight: 10,
   },
   imageArrow: {
     width: 12,
     height: 20,
+  },
+  viewImageFlex10: {
+    flex: 0.08,
+    justifyContent: 'center',
+  },
+  imageReplace: {
+    width: 25,
+    height: 25,
   },
   viewlistItemNameFlexDirectionFlex95: {
     flexDirection: 'row',

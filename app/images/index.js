@@ -11,4 +11,5 @@
    LIFEBUOY_ICON,
    ARROW_ICON,
    SELECTED_ICON,
+   REPLACE_ICON,
  } from './img';
