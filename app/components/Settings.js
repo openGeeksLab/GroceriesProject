@@ -180,6 +180,61 @@ const styles = StyleSheet.create({
   textChangeFontSizeButton: {
     fontSize: 20,
   },
+  viewAlphabeticalSort: {
+    height: 50,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  viewAlphabeticalSortFlexDirection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewSwitch: {
+    justifyContent: 'center',
+  },
+
+  viewPremiumFeatures: {
+    width,
+    height: 60,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  viewUnlockExtraFeatures: {
+    paddingHorizontal: 15,
+    height: 50,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  viewUnlockExtraFeaturesFlexDirection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  viewUnlockExtraFeaturesFlex55: {
+    flex: 0.55,
+  },
+  viewGoPremiumButtonFlex45: {
+    flex: 0.45,
+  },
+  touchableOpacityGoPremium: {
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+  },
+  textButtonGoPremium: {
+    textAlign: 'center',
+    fontSize: 18,
+  },
+
 });
 
 const listTheme = [
@@ -469,15 +524,14 @@ class Settings extends Component {
               </View>
             </View>
           </View>
-
-          <View style={{ height: 50, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, backgroundColor: getColor(theme).backgroundColor, borderColor: '#c8c7cc' }}>
+          <View style={[styles.viewAlphabeticalSort, {backgroundColor: getColor(theme).backgroundColor}]}>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+              style={styles.viewAlphabeticalSortFlexDirection}
             >
               <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
                 Alphabetical Sort
               </Text>
-              <View style={{ justifyContent: 'center' }}>
+              <View style={styles.viewSwitch}>
                 <Switch
                   onValueChange={(value) => this.setState({alphabeticalSort: value})}
                   value={this.state.alphabeticalSort}
@@ -487,23 +541,23 @@ class Settings extends Component {
           </View>
 
 
-          <View style={{ width, height: 60, backgroundColor: getColor(theme).backgroundColor, paddingHorizontal: 15, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+          <View style={[styles.viewPremiumFeatures, {backgroundColor: getColor(theme).backgroundColor}]}>
             <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}>
               Premium Features
             </Text>
           </View>
-          <View style={{ paddingHorizontal: 15, backgroundColor: getColor(theme).backgroundColor, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+          <View style={[styles.viewUnlockExtraFeatures, { backgroundColor: getColor(theme).backgroundColor }]}>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+              style={styles.viewUnlockExtraFeaturesFlexDirection}
             >
-              <View style={{ flex: 0.55 }}>
+              <View style={styles.viewUnlockExtraFeaturesFlex55}>
                 <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color}}>
                   Unlock extra features
                 </Text>
               </View>
-              <View style={{ flex: 0.45 }}>
-                <TouchableOpacity style={{ justifyContent: 'center', borderWidth: 1, borderColor: getColor(theme).colorButtons, borderRadius: 5, paddingHorizontal: 10, paddingVertical: 3,}}>
-                  <Text style={{ textAlign: 'center', fontFamily: getFontFamilyFromName(fontFamily), fontSize: 18, color: getColor(theme).colorButtons }}>
+              <View style={styles.viewGoPremiumButtonFlex45}>
+                <TouchableOpacity style={[styles.touchableOpacityGoPremium, { borderColor: getColor(theme).colorButtons, }]}>
+                  <Text style={[styles.textButtonGoPremium, { fontFamily: getFontFamilyFromName(fontFamily), color: getColor(theme).colorButtons }]}>
                     Go Premium
                   </Text>
                 </TouchableOpacity>
@@ -518,7 +572,7 @@ class Settings extends Component {
               <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color}}>
                 Cloud Sync
               </Text>
-              <View style={{ justifyContent: 'center',}}>
+              <View style={styles.viewSwitch}>
                 <Switch
                   onValueChange={(value) => this.setState({cloudSync: value})}
                   value={this.state.cloudSync}
