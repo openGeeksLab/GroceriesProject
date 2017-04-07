@@ -151,7 +151,7 @@ class Settings extends Component {
         style={{
           borderBottomWidth: 1,
           borderColor: '#c8c7cc',
-          backgroundColor: getColor(theme).backgroundColor,
+          backgroundColor: getColor(item.name).backgroundColor,
         }}
       >
         <TouchableOpacity
@@ -166,7 +166,7 @@ class Settings extends Component {
         >
           <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
-              style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}
+              style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(item.name).color }}
             >
               {item.name}
             </Text>
@@ -207,7 +207,7 @@ class Settings extends Component {
         >
           <View style={{ height: 40, justifyContent: 'center' }}>
             <Text
-              style={{fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}
+              style={{fontFamily: getFontFamilyFromName(item.name), fontSize, color: getColor(theme).color }}
             >
               {item.name}
             </Text>
