@@ -234,7 +234,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
-
+  viewCloudSync: {
+    height: 50,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#c8c7cc',
+  },
+  viewCloudSyncFlexDirection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });
 
 const listTheme = [
@@ -565,9 +576,9 @@ class Settings extends Component {
             </View>
           </View>
 
-          <View style={{ height: 50, backgroundColor: getColor(theme).backgroundColor, paddingHorizontal: 15, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+          <View style={[styles.viewCloudSync, {  backgroundColor: getColor(theme).backgroundColor,  }]}>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+              style={styles.viewCloudSyncFlexDirection}
             >
               <Text style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color}}>
                 Cloud Sync
