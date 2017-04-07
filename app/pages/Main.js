@@ -34,6 +34,10 @@ export default class Main extends Component {
     uiTheme: PropTypes.object.isRequired,
   }
 
+  state = {
+    editMode: false,
+  }
+
   renderItemList = (item, index) => {
     const { fontSize, fontFamilyName, theme, list } = this.props;
     const backgroundColor = getColor(theme).backgroundColor;
@@ -41,18 +45,50 @@ export default class Main extends Component {
     const fontFamily = getFontFamilyFromName(fontFamilyName);
     return (
       <View key={item.id} style={[styles.viewListItem, { backgroundColor }]}>
-        <TouchableOpacity style={styles.touchableOpacityListItemFlexDirection}>
-          <View style={styles.viewListItemNameFlex95}>
-            <Text style={{fontSize, fontFamily, color}}>
-              {item.name}
-            </Text>
-          </View>
-          <View style={styles.viewImageFlex5}>
-            <Image style={styles.imageArrow} resizeMode={'contain'} source={ARROW_ICON} />
-          </View>
-        </TouchableOpacity>
+        {
+          !this.state.editMode
+          ?
+            <View style={styles.touchableOpacityListItemFlexDirection}>
+              <View style={styles.viewlistItemNameFlexDirectionFlex95}>
+                <TouchableOpacity
+                 style={styles.viewDelete}
+                >
+                  <Text style={styles.textDelete}>
+                    -
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.viewListItemNameFlex85}>
+                  <Text style={{fontSize, fontFamily, color}}>
+                    {item.name}
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity
+               style={styles.viewImageFlex5}
+              >
+                <Image style={styles.imageArrow} resizeMode={'contain'} source={ARROW_ICON} />
+              </TouchableOpacity>
+            </View>
+          :
+            <TouchableOpacity style={styles.touchableOpacityListItemFlexDirection}>
+              <View style={styles.viewListItemNameFlex95}>
+                <Text style={{fontSize, fontFamily, color}}>
+                  {item.name}
+                </Text>
+              </View>
+              <View style={styles.viewImageFlex5}>
+                <Image style={styles.imageArrow} resizeMode={'contain'} source={ARROW_ICON} />
+              </View>
+            </TouchableOpacity>
+        }
       </View>
     );
+  }
+
+  setEditMode = () => {
+    this.setState({
+      editMode: !this.state.editMode,
+    });
   }
 
   render() {
@@ -67,8 +103,8 @@ export default class Main extends Component {
           color={getColor(theme).colorHeaderAndFooter}
           tintColor={getColor(theme).colorHeaderAndFooter}
           leftIcon={SETTINGS_ICON}
-          leftAction={() => { this.props.navigator.push({ title: 'Settings' }) }}
-          rightAction={() => {console.warn('MAIN')}}
+          leftAction={() => {this.props.navigator.push({ title: 'Settings'})}}
+          rightAction={() => {this.setEditMode()}}
           rightIcon={EDIT_ICON}
           title={'Lists'}
           fontSize={fontSize}

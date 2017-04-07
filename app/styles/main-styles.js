@@ -49,9 +49,34 @@ const styles = StyleSheet.create({
     flex: 0.95,
     paddingRight: 10,
   },
+  viewListItemNameFlex85: {
+    flex: 0.85,
+    paddingLeft: 5,
+    paddingRight: 10,
+  },
   imageArrow: {
     width: 12,
     height: 20,
+  },
+  viewlistItemNameFlexDirectionFlex95: {
+    flexDirection: 'row',
+    flex: 0.95,
+    alignItems: 'center',
+  },
+  textDelete: {
+    marginBottom: 4,
+    fontWeight: '500',
+    fontSize: 30,
+    color: 'white',
+    backgroundColor: 'transparent',
+  },
+  viewDelete: {
+    backgroundColor: 'red',
+    height: 25,
+    width: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: Platform.OS === 'andoird' ? 25 : 12,
   },
 });
 
