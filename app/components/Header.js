@@ -88,11 +88,4 @@ Header.propTypes = {
   rightAction: PropTypes.func,
 };
 
-mapStatetoProps = (state) => {
-  return {
-    fontFamily: state.settings.fontFamily,
-    fontSize: state.settings.fontSize,
-  }
-}
-
 export default Header;

@@ -225,7 +225,16 @@ class Settings extends Component {
     });
     return (
       <View style={[styles.container, { backgroundColor: getColor(theme).backgroundColor }]}>
-        <Header color={getColor(theme).colorHeaderAndFooter} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
+        <Header
+          color={getColor(theme).colorHeaderAndFooter}
+          leftText={'Cancel'}
+          leftAction={() => {this.onCancelPress()}}
+          rightAction={() => {this.onDonePress()}}
+          rightText={'Done'}
+          title={'Settings'}
+          fontSize={fontSize}
+          fontFamily={fontFamily}
+        />
         <ScrollView>
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
             <View style={styles.viewThemeLine}>
