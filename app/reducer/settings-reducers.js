@@ -14,16 +14,6 @@ export default function AppReducers(state = initialState, action) {
         ...state,
         fontFamily: action.fontFamily,
       };
-    case actionTypes.CHANGE_FONT_FAMILY:
-      return {
-        ...state,
-        fontFamily: action.fontFamily,
-      };
-    case actionTypes.GET_FONT_SIZE:
-      return {
-        ...state,
-        fontSize: action.fontSize
-      }
     case actionTypes.SET_FONT_SIZE:
       return {
         ...state,
@@ -34,15 +24,6 @@ export default function AppReducers(state = initialState, action) {
         ...state,
         theme: action.theme,
       }
-    case actionTypes.GET_THEME:
-      return {
-        ...state,
-        theme: action.theme
-      }
-    // case actionTypes.CLEAR_SETTINGS_INITIAL:
-    //   return {
-    //     ...initialState,
-    //   }
     default:
       return state;
   }

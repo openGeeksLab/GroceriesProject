@@ -2,12 +2,8 @@ import { AsyncStorage } from 'react-native';
 
 export const actionTypes = {
   SET_FONT_FAMILY: 'SET_FONT_FAMILY',
-  GET_FONT_FAMILY: 'GET_FONT_FAMILY',
-  GET_FONT_SIZE: 'GET_FONT_SIZE',
   SET_FONT_SIZE: 'SET_FONT_SIZE',
-  // CLEAR_SETTINGS_INITIAL: 'CLEAR_SETTINGS_INITIAL',
   SET_THEME: 'SET_THEME',
-  GET_THEME: 'GET_THEME',
 };
 
 export const getTheme = () =>
@@ -16,7 +12,7 @@ export const getTheme = () =>
       const parsedState = JSON.parse(state);
       if (parsedState && parsedState.theme) {
         dispatch({
-          type: actionTypes.GET_THEME,
+          type: actionTypes.SET_THEME,
           theme: parsedState.theme,
         })
       }
@@ -56,7 +52,7 @@ export const getFontSize = () =>
       const parsedState = JSON.parse(state);
       if (parsedState && parsedState.fontSize) {
         dispatch({
-          type: actionTypes.GET_FONT_SIZE,
+          type: actionTypes.SET_FONT_SIZE,
           fontSize: parsedState.fontSize,
         });
       }
@@ -69,20 +65,3 @@ export const setFontSize = (fontSize) => {
     fontSize,
   }
 }
-
-// export const clearSettings = () => {
-//   // AsyncStorage.getAllKeys((err,keys) => {
-//   //   AsyncStorage.multiGet(keys, (err, stores) => {
-//   //     stores.map((store, i) => {
-//   //       if (store[0] === 'fontSize' || store[0] === 'fontFamily') {
-//   //         getFontSize();
-//   //         getFontFamily();
-//   //       } else {
-//   //         return {
-//   //           type: actionTypes.CLEAR_SETTINGS_INITIAL,
-//   //         };
-//   //       }
-//   //     });
-//   //   });
-//   // });
-// }
