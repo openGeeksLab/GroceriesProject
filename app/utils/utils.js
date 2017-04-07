@@ -22,7 +22,7 @@ export const getFontFamilyFromName = (fontFamily) => {
       return AmericanTypewriter;
     case 'Cochin':
       return Cochin;
-    case 'times':
+    case 'Times New Roman':
       return times;
     case 'DIN Alternate':
       return DIN_Alternate;

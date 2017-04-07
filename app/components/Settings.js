@@ -11,6 +11,7 @@ import {
   AsyncStorage,
   StatusBar,
   Platform,
+  Animated,
 } from 'react-native';
 import { TUTORIAL_ICON, LIFEBUOY_ICON, STAR_ICON, ARROW_ICON, SELECTED_ICON } from 'AppIcons';
 import Header from './Header';
@@ -80,18 +81,42 @@ class Settings extends Component {
     fontFamily: this.props.fontFamily,
     alphabeticalSort: false,
     cloudSync: false,
+    spinValueFont: new Animated.Value(0),
+    spinValueTheme: new Animated.Value(0),
+  }
+
+  spinTheme (toValue) {
+  	Animated.timing(
+    	this.state.spinValueTheme,
+      {
+      	toValue,
+        duration: 500,
+      }
+    ).start()
+  }
+
+  spinFont (toValue) {
+  	Animated.timing(
+    	this.state.spinValueFont,
+      {
+      	toValue,
+        duration: 500,
+      }
+    ).start()
   }
 
   openListTheme = () => {
     this.setState({
       openTheme: !this.state.openTheme,
     });
+    this.spinTheme(!this.state.openTheme ? 1 : 0);
   }
 
   openListFont = () => {
     this.setState({
       openFont: !this.state.openFont,
     });
+    this.spinFont(!this.state.openFont ? 1 : 0);
   }
 
   onDonePress = () => {
@@ -214,12 +239,20 @@ class Settings extends Component {
 
   render() {
     const { fontSize, fontFamily, theme } = this.state;
+    const spinTheme = this.state.spinValueTheme.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '90deg']
+    });
+    const spinFont = this.state.spinValueFont.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '90deg']
+    });
     return (
       <View style={[styles.container, { backgroundColor: getColor(theme).backgroundColor }]}>
         <Header color={getColor(theme).colorHeaderAndFooter} leftText={'Cancel'} leftAction={() => {this.onCancelPress()}} rightAction={() => {this.onDonePress()}} rightText={'Done'} title={'Settings'} fontSize={fontSize} />
         <ScrollView>
           <View style={{ backgroundColor: getColor(theme).backgroundColor }}>
-            <View style={{ width, paddingHorizontal: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
+            <View style={{ width, paddingLeft: 15, paddingRight: 15, height: 50, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#c8c7cc' }}>
               <TouchableOpacity
                 onPress={() => {this.openListTheme()}}
                 style={{ flexDirection: 'row', justifyContent: 'space-between', }}
@@ -231,10 +264,12 @@ class Settings extends Component {
                 </View>
                 <View style={{ flex: 0.65, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), paddingRight: 10, color: getColor(theme).color }}>
+                    <Text style={{ fontSize, fontFamily: getFontFamilyFromName(fontFamily), color: getColor(theme).color }}>
                       {this.state.theme}
                     </Text>
-                    <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openTheme ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
+                    <Animated.View style={{ height: 20, width: 20, justifyContent: 'center', alignItems: 'center', transform: [{rotate: spinTheme}], }}>
+                      <Animated.Image style={{ height: 20, width: 12, }} source={ARROW_ICON}/>
+                    </Animated.View>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -256,11 +291,13 @@ class Settings extends Component {
                 <View style={{ flex: 0.75, alignItems: 'flex-end', justifyContent: 'center' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
-                      style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, paddingRight: 10, color: getColor(theme).color }}
+                      style={{ fontFamily: getFontFamilyFromName(fontFamily), fontSize, color: getColor(theme).color }}
                     >
                       {this.state.fontFamily}
                     </Text>
-                    <Image style={{ height: 20, width: 10, transform: [{rotate: this.state.openFont ? '90deg' : '0deg'}], }} source={ARROW_ICON}/>
+                    <Animated.View style={{ height: 20, width: 20, transform: [{rotate: spinFont}], justifyContent: 'center', alignItems: 'center' }}>
+                      <Animated.Image style={{ height: 20, width: 12, }} source={ARROW_ICON}/>
+                    </Animated.View>
                   </View>
                 </View>
               </TouchableOpacity>
